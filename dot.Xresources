@@ -1,0 +1,71 @@
+!! dot.Xresources
+
+!! general
+!*background:                            grey85
+!*foreground:                            grey0
+*font:                                  nexus
+*Font:                                  nexus
+
+!! xosview
+xosview*font:                           nexus
+xosview*geometry:                       -0-0
+xosview*background:                     #000000
+xosview*foreground:                     #000000
+
+!! xlock
+xlock*background:                       black
+xlock*font:                             nexus
+xlock*foreground:                       white
+xlock*install:                          on
+xlock*logoutButton:                     -1
+xlock*mode:                             blank
+xlock*nice:                             20
+xlock*planfont:                         nexus
+
+!! xterm
+xterm*background:                       #000000
+xterm*font:                             nexus
+xterm*boldFont:                         nexus
+xterm*font4:                            sabvga
+!xterm*boldColors:                       true
+!xterm*boldMode:                         false
+xterm*charClass:                        33:48,37:48,45-47:48,64:48
+xterm*color0:                           #000000
+xterm*color1:                           #aa0000
+xterm*color2:                           #008800
+xterm*color3:                           #aa5522
+xterm*color4:                           #0000aa
+xterm*color5:                           #aa00aa
+xterm*color6:                           #00aaaa
+xterm*color7:                           #cccccc
+xterm*color8:                           #444444
+xterm*color9:                           #ff4444
+xterm*color10:                          #44ff44
+xterm*color11:                          #ffff44
+xterm*color12:                          #4444ff
+xterm*color13:                          #ff44ff
+xterm*color14:                          #44ffff
+xterm*color15:                          #ffffff
+xterm*colorBD:                          #ffffff
+xterm*colorUL:                          #ffffff
+!xterm*cursorColor:                      #ffff00
+xterm*cutToBeginningOfLine:             false
+xterm*foreground:                       #cccccc
+xterm*loginShell:                       true
+xterm*printAttributes:                  2
+xterm*saveLines:                        2048
+xterm*scrollBar:                        false
+xterm*scrollKey:                        true
+xterm*scrollTtyOutput:                  false
+xterm*zIconBeep:                        50
+
+Xft.dpi:                                96
+
+xclock*reverseVideo:                    true
+xclock*foreground:                      grey85
+xclock*analog:                          false
+xclock*font:                            nexus
+xclock*face:                            nexus
+
+!! vim:set ft=xdefaults:
+!! vi:set et:

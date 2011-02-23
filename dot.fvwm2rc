@@ -1,0 +1,668 @@
+# dot.fvwm2rc
+#
+# This configuration file is been made for FVWM 2.5.26 packaged by Debian.
+
+ignoremodifiers l25
+desktopsize 1x1
+#defaultfont "xft:Verdana:Medium:Roman:size=8"
+defaultfont "nexus"
+xorvalue 208
+colormapfocus followsfocus
+
+desktopname 5 private
+desktopname 6 office
+desktopname 7 www
+desktopname 8 mail
+desktopname 9 chat
+
+# 20100302 - TODO
+# implement xinerama support on:
+# - key r a cms: move to the left-top of the current screen
+# - key t a cms: move to the right-bottom of the current screen
+
+setenv NOPAGES 10
+setenv PAGERHEIGHT 28
+setenv XCLOCKWIDTH 106
+
+piperead 'echo setenv LASTPAGE $(($[NOPAGES] - 1))'
+# calculate pager width based on its height
+piperead 'echo setenv PAGERWIDTH $(($[vp.width] * $[PAGERHEIGHT] / $[vp.height] * $[NOPAGES]))'
+# 20091223 - each icon from stalonetray uses 24x24 pixels
+# 20100808 - bigger tray - was 3 and now is 5
+piperead 'echo setenv STALONETRAYWIDTH $((24 * 5))'
+
+# set the window area for the maximized windows
+ewmhbasestruts 0 0 0 $[PAGERHEIGHT]
+
+#cursorstyle root         left_ptr
+#cursorstyle title        left_ptr
+#cursorstyle default      left_ptr
+#cursorstyle sys          left_ptr
+#cursorstyle menu         left_ptr
+#
+#busycursor dynamicmenu true, read true
+
+destroydecor default-decor
+addtodecor default-decor
++ buttonstyle reset
+#+ buttonstyle 2 vector 17 20x20@1 30x20@1 50x40@1 70x20@1 80x20@1 80x30@0 \
+#                          60x50@0 80x70@0 80x80@0 70x80@0 50x60@0 30x80@0 \
+#                          20x80@0 20x70@1 40x50@1 20x30@0 20x20@1
+#+ buttonstyle 4 vector 5  25x75@0 75x75@0 75x25@0 25x25@1 25x75@1
+#+ buttonstyle 6 vector 4  50x75@1 25x25@1 75x25@1 50x75@0
++ borderstyle active -- noinset hiddenhandles
++ borderstyle inactive -- noinset hiddenhandles
++ titlestyle activeup vgradient 16 #444444 #222222 -- flat
++ titlestyle activedown vgradient 16 #555555 #333333 -- flat
++ titlestyle inactive vgradient 16 #333333 #111111 -- flat
++ titlestyle leftjustified height 14
++ buttonstyle all -- usetitlestyle flat
+
+#+ TitleStyle LeftJustified Height 17
+#+ TitleStyle InActive ( Colorset 7 -- Flat ) Active ( Colorset 7 -- Flat )
+#+ AddTitleStyle Active ( TiledPixmap title_back.png -- Flat ) \
+#    Inactive ( TiledPixmap title_back_inactive.png -- Flat )
+#+ ButtonStyle All InActive ( Colorset 7 -- Flat )
+#+ ButtonStyle All Active ( Colorset 7 -- Flat )
+#+ AddButtonStyle  All Inactive TiledPixmap title_back_inactive.png -- Flat
+#+ AddButtonStyle  All Active TiledPixmap title_back.png -- Flat
++ AddButtonStyle  1 Active Vector 4 49x49@2 49x51@2 51x51@2 51x49@2 -- Flat
++ AddButtonStyle  1 Inactive Vector 4 49x49@3 49x51@3 51x51@3 51x49@3 -- Flat
++ AddButtonStyle  1 AllUp Vector 2 50x55@1 50x55@1 -- Flat
+#+ AddButtonStyle  1 Active MiniIcon -- Flat
+#+ AddButtonStyle  1 InActive MiniIcon -- Flat
++ AddButtonStyle  2 Active Vector 4 40x40@2 60x60@2 60x40@4 40x60@2 -- Flat
++ AddButtonStyle  2 Inactive Vector 4 40x40@3 60x60@3 60x40@4 40x60@3 -- Flat
++ AddButtonStyle  2 AllUp Vector 4 40x45@1 60x65@1 60x45@4 40x65@1 -- Flat
++ AddButtonStyle  4 Active Vector 7 40x40@2 40x60@2 60x60@2 60x40@2 40x40@2 40x45@2 60x45@2 -- Flat
++ AddButtonStyle  4 Inactive Vector 7 40x40@3 40x60@3 60x60@3 60x40@3 40x40@3 40x45@3 60x45@3 -- Flat
++ AddButtonStyle  4 AllUp Vector 4 40x65@1 60x65@1 45x50@4 55x50@1 -- Flat
++ AddButtonStyle  6 Active Vector 5 40x60@2 60x60@2 60x55@2 40x55@2 40x60@2 -- Flat
++ AddButtonStyle  6 Inactive Vector 5 40x60@3 60x60@3 60x55@3 40x55@3 40x60@3 -- Flat
++ AddButtonStyle  6 AllUp Vector 2 40x65@1 60x65@1 -- Flat
++ AddButtonStyle  8 Active Vector 9 40x40@2 45x35@2 55x35@2 60x40@2 60x45@2 50x50@2 50x55@2 50x65@4 50x65@2 -- Flat
++ AddButtonStyle  8 InActive Vector 9 40x40@3 45x35@3 55x35@3 60x40@3 60x45@3 50x50@3 50x55@3 50x65@4 50x65@3 -- Flat
++ AddButtonStyle  8 AllUp Vector 7 40x45@1 45x40@1 55x40@1 60x50@4 50x60@1 50x75@4 50x75@1 -- Flat
++ ButtonStyle 1 - MwmDecorMenu
++ ButtonStyle 6 - MwmDecorMin
++ ButtonStyle 4 - MwmDecorMax
++ BorderStyle Active Solid black -- NoInset HiddenHandles
++ BorderStyle Inactive Solid black -- NoInset HiddenHandles
+
+#style "default-style"   font "xft:Verdana:Medium:Roman:size=8"
+style "default-style"   font "nexus"
+style "default-style"   clicktofocus
+style "default-style"   grabfocus, grabfocustransient
+#style "default-style"   fpgrabfocus, \
+#                        fpgrabfocustransient, fpreleasefocustransient
+style "default-style"   borderwidth 3, handlewidth 3
+style "default-style"   color #777777/#222222
+style "default-style"   forecolor #777777, backcolor #333333
+style "default-style"   hilightfore #eeeeee, hilightback #444444
+style "default-style"   usedecor default-decor
+style "default-style"   decoratetransient
+
+# 20090715 - adding ewmh hints
+style "default-style"   ewmhusestackingorderhints, ewmhusestatehints
+style "default-style"   ewmhusestruthints, !ewmhignorewindowtype
+style "default-style"   ewmhmaximizeusedynamicworkingarea
+style "default-style"   ewmhplacementusedynamicworkingarea
+# 20100226 - removed the following line due to "bad style option" error message
+# on fvwm 2.5.26 (debian lenny)
+#style "default-style"   usegravity
+
+# 20100226 - the following settings block (20081101) have been removed due to
+# "deprecated" warning messages on fvwm 2.5.26 (debian lenny) - it have been
+# substituted by the 20090129 settings block (AGAIN)
+# 20081101 - fvwm 2.5 and xinerama support
+#edgescroll 0 0
+#edgeresistance 250 10
+# 20090129 - newer fvwm 2.5 uses the syntax of the line below
+edgeresistance 250
+style "default-style" edgemovedelay 250
+style "default-style" edgemoveresistance 20 20
+
+# 20100303 - disable opaque move - boring
+opaquemovesize 0
+
+# 20090129 - newer fvwm 2.5 uses the syntax of the second line below
+#snapattraction 10 sametype screen
+style "default-style"   snapattraction 10
+
+style "default-style"   miniicon mini.bx2.xpm
+
+# 20100303 - removed iconbox and icons
+#piperead 'echo style "default-style" iconbox $(($[vp.width] - $[STALONETRAYWIDTH] - $[XCLOCKWIDTH] - $[PAGERWIDTH]))x$[PAGERHEIGHT]+$(($[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
+style "default-style"   noicon
+
+style "*"               usestyle default-style
+
+style "xterm"           notitle, borderwidth 1, handlewidth 1, \
+                        forecolor #656565, backcolor #252525, \
+                        hilightfore #ffffff, hilightback #656565, \
+                        miniicon mini.term.xpm
+
+style "rxvt"            notitle
+style "xconsole"        sticky, notitle, windowlistskip, circulateskip, \
+                        borderwidth 0, handlewidth 0
+style "xclock"          sticky, notitle, windowlistskip, circulateskip, \
+                        borderwidth 0, handlewidth 0
+# 20091124 - added "stalonetray" style
+# 20100808 - moved stalonetray to fvwmbuttons
+
+style "rdesktop"        notitle, borderwidth 1, handlewidth 1
+style "Xephyr*"         notitle, borderwidth 1, handlewidth 1
+
+# desktop: fun
+style "pidgin"          startsondesk $[LASTPAGE]
+style "xchat"           startsondesk $[LASTPAGE]
+style "skype"           startsondesk $[LASTPAGE]
+style "beep-media-player" startsondesk $[LASTPAGE], notitle
+style "xmms"            startsondesk $[LASTPAGE], notitle
+# 20100808 - added new "empathy" style
+style "empathy"         startsondesk $[LASTPAGE]
+
+# desktop: private
+style "Icedove*"        startsondesk 8, notitle
+style "xpad"            startsondesk 8, notitle, borderwidth 0, handlewidth 0
+style "mutt"            startsondesk 8, notitle, borderwidth 1, handlewidth 1
+
+# desktop: www
+style "opera"           startsondesk 7, notitle
+style "Firefox"         startsondesk 7, notitle
+style "Iceweasel"       startsondesk 7, notitle
+style "Mozilla*"        startsondesk 7, notitle
+style "Netscape*"       startsondesk 7, notitle
+style "dillo"           startsondesk 7
+style "*Google Chrome*" startsondesk 7, notitle
+# 20100808 - added "*Chromium*" style
+style "*Chromium*"      startsondesk 7, notitle
+
+# desktop: office
+style "Adobe*"          startsondesk 6
+style "OpenOffice.org*" startsondesk 6
+style "BrOffice.org*"   startsondesk 6
+style "*FreeMind*"      startsondesk 6
+
+# no desktop
+style "gkrellm"         sticky, staysontop, notitle, circulateskip
+style "xosview"         sticky, staysontop, notitle, windowlistskip, \
+                        circulateskip, borderwidth 0, handlewidth 0
+style "FvwmPager"       sticky, handlewidth 0, borderwidth 0, notitle, \
+                        windowlistskip, circulateskip
+# 20100808 - added "FvwmButtons" style
+style "FvwmButtons"     sticky, handlewidth 0, borderwidth 0, notitle, \
+                        windowlistskip, circulateskip
+style "FvwmIconMan"     sticky, notitle, windowlistskip, circulateskipicon, \
+                        circulateskip, nohandles, borderwidth 0, \
+                        fixedposition, fixedsize, !iconifiable, \
+                        staysonbottom, neverfocus
+
+menustyle "*"           win
+#menustyle "*"           trianglesrelief
+menustyle "*"           borderwidth 1
+menustyle "*"           popupoffset 0 100
+menustyle "*"           hilight3doff
+#menustyle "*"           automatichotkeys
+#menustyle "*"           font "xft:Verdana:Medium:Roman:size=8"
+menustyle "*"           font "nexus"
+# unselected text
+menustyle "*"           foreground #888888
+# box background
+menustyle "*"           background #333333
+#menustyle "*"           greyed #ffffff
+# selected text
+menustyle "*"           activefore #ffffff
+#menustyle "*"           menuface dgradient 128 2 #444444 1 #444444 99 #222222
+menustyle "*"           hilightback #222222
+
+#+ titlestyle activeup vgradient 16 #444444 #222222 -- flat
+#+ titlestyle activedown vgradient 16 #555555 #333333 -- flat
+#+ titlestyle inactive vgradient 16 #333333 #111111 -- flat
+
+# mouse actions
+mouse 1 r a menu menu-root
+mouse 2 r a menu window-ops
+mouse 3 r a windowlist
+
+mouse 0 t a move-and-raise
+mouse 0 w m -
+mouse 0 f a resize
+mouse 0 s a resize
+
+mouse 0 i a move-or-winmenu-or-deiconify
+
+mouse 1 w m move-and-raise
+
+# title bar buttons
+mouse 0 1 a popup window-ops
+mouse 0 2 a close
+mouse 1 4 a maximize
+mouse 2 4 a maximize 0 100
+mouse 3 4 a maximize 100 0
+mouse 0 6 a iconify
+
+# windows keys
+#key tab a m windowlist root c c currentdesk, nogeometry, currentatend, iconifiedatend
+# 20080715 - use comma instead of whitespace to separate conditions
+key tab     a   m   next (currentpage, !iconic, anyscreen) focus-and-raise
+key tab     a   ms  prev (currentpage, !iconic, anyscreen) focus-and-raise
+key tab     a   cm  next (currentpage, iconic, anyscreen) deiconify-and-focus-and-raise
+key tab     a   cms prev (currentpage, iconic, anyscreen) deiconify-and-focus-and-raise
+key space   a   m   popup window-ops interior 0 0 nop
+# 20090728 - new windowlist binding
+# 20091109 - removed windowlist binding
+#key space   a   c   windowlist root c c
+key escape  a   c   popup menu-root root c c nop
+key f2      a   m   exec eval exec `dmenu_path | dmenu -fn nexus -nb black -nf '#cccccc' -sb '#cccccc' -sf black`
+key f4      a   m   close
+key f7      a   m   move
+key f8      a   m   resize
+key f9      a   m   iconify-and-focus-and-raise-prev
+key f10     a   m   maximize
+key f11     a   m   windowshade
+
+# window resizing bindings
+key f10     a   ms  maximize grow grow
+key f11     a   ms  maximize 0 100
+key f12     a   ms  maximize 100 0
+# 20101002 - added new window maximization bindings
+key l       a   ms  maximize grow 0
+key h       a   ms  maximize grow 0
+key k       a   ms  maximize 0 grow
+key j       a   ms  maximize 0 grow
+
+# desktop keys
+key 1       a   cm  goto-desk 0 0
+key 2       a   cm  goto-desk 0 1
+key 3       a   cm  goto-desk 0 2
+key 4       a   cm  goto-desk 0 3
+key 5       a   cm  goto-desk 0 4
+key 6       a   cm  goto-desk 0 5
+key 7       a   cm  goto-desk 0 6
+key 8       a   cm  goto-desk 0 7
+key 9       a   cm  goto-desk 0 8
+key 0       a   cm  goto-desk 0 9
+
+# desktop changing keys
+# 20090722 - there is no need to hide e-mail or chat windows: show all pages in
+# the pager
+key h       a   cm  goto-desk -1 0 $[LASTPAGE]
+key l       a   cm  goto-desk +1 0 $[LASTPAGE]
+key j       a   cm  goto-desk prev
+key k       a   cm  goto-desk prev
+
+# desktop keys
+key 1       a   cms moveto-desk 0 0
+key 2       a   cms moveto-desk 0 1
+key 3       a   cms moveto-desk 0 2
+key 4       a   cms moveto-desk 0 3
+key 5       a   cms moveto-desk 0 4
+key 6       a   cms moveto-desk 0 5
+key 7       a   cms moveto-desk 0 6
+key 8       a   cms moveto-desk 0 7
+key 9       a   cms moveto-desk 0 8
+key 0       a   cms moveto-desk 0 9
+
+# xinerama/screen keys
+key 1       a   ms moveto-screen 0
+key 2       a   ms moveto-screen 1
+key 3       a   ms moveto-screen 2
+key 4       a   ms moveto-screen 3
+
+# window moving keys between desktops
+key h       w   cms moveto-desk -1 0 $[LASTPAGE]
+key l       w   cms moveto-desk +1 0 $[LASTPAGE]
+
+# window raise/lower keys
+key k       a   m   raise
+key j       a   m   lower
+
+# window moving keys
+key left    a   cms move w-$[w.width]p w-0p
+key right   a   cms move w+$[w.width]p w+0p
+key down    a   cms move w+0p w+$[w.height]p
+key up      a   cms move w-0p w-$[w.height]p
+
+# xterm resizing and positioning keys
+key r       a   cms move 0p 0p
+key t       a   cms move -0p -0p
+key r       a   cm  resize 80c 24c
+key w       a   cm  resize keep w+1c
+key w       a   cms resize keep w-1c
+
+# other
+key x       a   cms exec exec xterm
+key v       a   cms exec exec rxvt
+key delete  a   cm  lock-x
+
+key XF86AudioPlay           a   n   exec exec xmms2 toggleplay
+key XF86AudioStop           a   n   exec exec xmms2 stop
+key XF86AudioPrev           a   n   exec exec xmms2 prev
+key XF86AudioNext           a   n   exec exec xmms2 next
+key XF86AudioLowerVolume    a   n   exec exec amixer sset PCM 5%-
+key XF86AudioRaiseVolume    a   n   exec exec amixer sset PCM 5%+
+key XF86Mail                a   n   exec exec xterm -e mutt
+key XF86OfficeHome          a   n   exec exec google-chrome
+key XF86Calculator          a   n   exec exec xterm -e bc
+key XF86Stop                a   n   lock-x
+key XF86AudioMute           a   n   exec exec amixer sset 'Master Front' toggle
+
+destroymenu menu-root
+addtomenu   menu-root "fvwm2" title
++   "xterm"         exec exec xterm
++   "xterm utf-8"   exec LANG=en_US.UTF-8 exec xterm
++   "windowlist"    windowlist
++   ""              nop
++   "utils"         popup menu-utils
++   "development"   popup menu-development
++   "hardware"      popup menu-hardware
++   "image"         popup menu-image
++   "internet"      popup menu-internet
++   "multimedia"    popup menu-multimedia
++   "office"        popup menu-office
++   "ssh"           popup menu-ssh
++   "system"        popup menu-system
++   ""              nop
++   "exit"          popup menu-quit
+
+destroymenu menu-utils
+addtomenu   menu-utils
++   "fvwmconsole"   module FvwmConsole
++   "xlock"         exec exec xlock
+
+destroymenu menu-office
+addtomenu   menu-office
++   "acroread"      exec exec acroread
++   "dia"           exec exec dia
++   "evince"        exec exec evince
++   "freemind"      exec exec freemind
++   "gpdf"          exec exec gpdf
++   "openoffice"    exec exec soffice
++   "xpad"          exec exec xpad
++   "xpdf"          exec exec xpdf
+
+destroymenu menu-ssh
+addtomenu   menu-ssh
+piperead 'awk \'/^[Hh]ost/{ if ($$2 != "*") printf("+ \\"%s\\" exec exec xterm -e ssh %s\\n", $$2, $$2); }\' ~/.ssh/config | sort'
+
+destroymenu menu-multimedia
+addtomenu   menu-multimedia
++   "alsamixer"     exec exec xterm -e alsamixer
++   "audacity"      exec exec xterm -e audacity
++   "aumix"         exec exec xterm -e aumix
++   "beep-media-player" exec exec beep-media-player
++   "dvdrip"        exec exec dvdrip
++   "gmplayer"      exec exec gmplayer
++   "grip"          exec exec grip
++   "gxine"         exec exec gxine
++   "rhythmbox"     exec exec rhythmbox
++   "totem"         exec exec totem
++   "wxvlc"         exec exec wxvlc
++   "xine"          exec exec xine
++   "xmcd"          exec exec xmcd
++   "xmms"          exec exec xmms
+
+destroymenu menu-image
+addtomenu   menu-image
++   "gimp"          exec exec gimp
++   "gqview"        exec exec gqview
++   "gthumb"        exec exec gthumb
++   "xmag"          exec exec xmag
+
+destroymenu menu-system
+addtomenu   menu-system
++   "gkrellm"       exec exec gkrellm
++   "top"           exec exec xterm -e top
++   "xfontsel"      exec exec xfontsel
++   "xkill"         exec exec xkill
++   "xosview"       exec exec xosview
++   "xwininfo"      exec exec xterm -hold -e /usr/X11R6/bin/xwininfo
++   ""              nop
++   "xconsole"      exec exec xconsole -file /dev/xconsole
+
+destroymenu menu-development
+addtomenu   menu-development
++   "anjuta"        exec exec anjuta
++   "eclipse"       exec exec eclipse
++   "qt designer"   exec exec designer
+
+destroymenu menu-hardware
+addtomenu   menu-hardware
++   "flip"          exec exec flip
+
+destroymenu menu-internet
+addtomenu   menu-internet
++   "amule"         exec exec amule
++   "azureus"       exec exec azureus
++   "bitchx"        exec exec xterm -fn sabvga -e BitchX
++   "dillo"         exec exec dillo
++   "epic"          exec exec xterm -e epic
++   "evolution"     exec exec evolution
++   "firefox"       exec exec firefox
++   "gftp"          exec exec gftp
++   "google earth"  exec exec googleearth
++   "iptraf"        exec exec xterm -e iptraf
++   "lynx"          exec exec xterm -e lynx
++   "micq"          exec exec xterm -e micq
++   "mozilla"       exec exec mozilla
++   "mutt"          exec exec xterm -e mutt
++   "opera"         exec exec opera
++   "pidgin"        exec exec pidgin
++   "skype"         exec exec skype
++   "xchat"         exec exec xchat
+
+destroymenu window-ops
+addtomenu   window-ops "window ops" title
++   "main menu"                 popup menu-root
++   "windowlist"                windowlist
++   "lower"                     lower
++   "window list"               windowlist
++   "previous"                  prev
++   "next"                      next (currentpage, !iconic, anyscreen) focus-and-raise
++   "move"                      move
++   "resize"                    resize
++   "(de)iconify"               iconify
++   "(un)maximize to screen"    maximize
++   "raise"                     raise
++   "(un)stick"                 stick
++   "(un)maximize vertical"     maximize 0 100
++   "(un)maximize horizontal"   maximize 100 0
++   "(un)shade"                 windowshade
++   ""                          nop
++   "scrollbar"                 module FvwmScroll 2 2
++   ""                          nop
++   "destroy"                   destroy
++   "close"                     close
+
+destroymenu menu-quit
+addtomenu   menu-quit
++ "restart"         restart
++ "xfce4"           restart startxfce4
++ "gnome"           restart gnome-session
++ "xterm"           restart xterm
++ "rxvt"            restart rxvt
++ "enlightenment"   restart enlightenment
++ "wmii"            restart wmii
++ "icewm"           restart icewm
++ ""                nop
++ "really quit"     quit
+
+destroyfunc lock-x
+addtofunc   lock-x
+#+ "i" exec date +'%nswrh: screen locked at %Y%m%d %H:%M:%S%n'; sleep 1; xset dpms force standby; slock; date +'%nswrh: screen unlocked at %Y%m%d %H:%M:%S%n'
++ "i" exec workstation-log "screen locked"; sleep 1; xset dpms force standby; slock; workstation-log "screen unlocked"
+
+destroyfunc moveto-desk
+addtofunc   moveto-desk
+# 20091222 - remove stick property
++ "i" current stick false
+# 20081102 - "windowid $[w.id]" to "current"
++ "i" current movetodesk $*
+# 20081101 - xinerama support
++ "i" prev (currentpage, !iconic, anyscreen) focus-and-raise
+
+destroyfunc goto-desk
+addtofunc   goto-desk
++ "i" gotodesk $*
+#+ "i" exec exec xmessage -buttons '' -timeout 1 $[desk.name$[desk.n]]
+
+destroyfunc moveto-screen
+addtofunc   moveto-screen
++ "i" current movetoscreen $*
++ "i" current warptowindow 50 50
+
+destroyfunc move-or-raise
+addtofunc   move-or-raise
++ "m" move
++ "m" raise
++ "c" raise
++ "d" raiselower
+
+destroyfunc move-or-winmenu-or-deiconify
+addtofunc   move-or-winmenu-or-deiconify
++ "m" move
++ "c" popup window-ops
++ "d" iconify
+
+destroyfunc iconify-and-focus-and-raise-prev
+addtofunc   iconify-and-focus-and-raise-prev
++ "i" iconify true
++ "i" prev (currentpage, !iconic, anyscreen) focus-and-raise
+
+destroyfunc deiconify-and-focus-and-raise
+addtofunc   deiconify-and-focus-and-raise
++ "i" iconify false
+# 20081102 - rearrange icons after deiconifying
++ "i" all (currentpage, iconic, anyscreen) placeagain icon
++ "i" focus-and-raise
+
+destroyfunc deiconify-and-raise
+addtofunc   deiconify-and-raise
++ "i" iconify false
++ "i" raise
+
+destroyfunc focus-and-raise
+addtofunc   focus-and-raise
++ "i" focus
++ "i" raise
+
+destroyfunc flipfocus-and-raise
+addtofunc   flipfocus-and-raise
++ "i" flipfocus
++ "i" raise
+
+destroyfunc flipfocus-and-raise-and-warptowindow
+addtofunc   flipfocus-and-raise-and-warptowindow
++ "i" focus-and-raise
++ "i" current warptowindow 0 0
+
+destroyfunc move-or-raiselower
+addtofunc   move-or-raiselower
++ "m" move
++ "c" raiselower
+
+destroyfunc move-and-raise
+addtofunc   move-and-raise
++ "m" move
++ "m" raise
+
+destroyfunc move-or-raiselower-or-maximize-vertical
+addtofunc   move-or-raiselower-or-maximize-vertical
++ "m" move
++ "c" raiselower
++ "d" maximize 0 100
+
+destroyfunc resize
+addtofunc   resize
++ "m" resize
+
+destroyfunc initfunction
+addtofunc   initfunction
+# 20090814 - now log at what time we did what
+#+ "i" exec exec date +'%nswrh: fvwm started at %Y%m%d %H:%M:%S%n'
++ "i" exec exec workstation-log "fvwm started"
++ "i" exec exec xsetroot -solid \#000000
+# 20090722 - there is no need to hide e-mail or chat windows: show all pages in
+# the pager
++ "i" module FvwmPager 0 $[LASTPAGE]
++ "i" module FvwmIconMan
++ "i" module FvwmCommandS
++ "i" exec exec xinerama-root-tail -fn nexus --color '#cccccc'
++ "i" exec exec xclock -d -geometry $[XCLOCKWIDTH]x$[PAGERHEIGHT]+$[STALONETRAYWIDTH]-0 -strftime '%Y%m%d %H:%M' -face sans-serif:size=8
+# 20100808 - moved stalonetray to FvwmButtons
++ "i" module FvwmButtons -g $[STALONETRAYWIDTH]x$[PAGERHEIGHT]+0-0
++ "i" exec sleep 3; exec nm-applet
++ "i" exec sleep 3; exec gnome-power-manager
+
+destroyfunc restartfunction
+addtofunc   restartfunction
+# 20090814 - now log at what time we did what
+#+ "i" exec exec date +'%nswrh: fvwm restarted at %Y%m%d %H:%M:%S%n'
++ "i" exec exec workstation-log "fvwm restarted"
+# 20090722 - there is no need to hide e-mail or chat windows: show all pages in
+# the pager
++ "i" module FvwmPager 0 $[LASTPAGE]
++ "i" module FvwmIconMan
++ "i" module FvwmCommandS
+
+destroyfunc exitfunction
+addtofunc   exitfunction
+#+ "i" exec exec date +'%nswrh: fvwm exited at %Y%m%d %H:%M:%S%n'
++ "i" exec exec workstation-log "fvwm exited"
+
+*fvwmpagerrows 1
+# 20090722 - there is no need to hide e-mail or chat windows: show all pages in
+# the pager
+*fvwmpagercolumns $[NOPAGES]
+*fvwmpagergeometry $[PAGERWIDTH]x$[PAGERHEIGHT]-0-0
+*fvwmpagerfont none
+#*fvwmpagersmallfont "xft:Verdana:Medium:Roman:size=6"
+*fvwmpagersmallfont "nexus"
+*fvwmpagerfore #333333
+*fvwmpagerback #000000
+*fvwmpagerhilight #171717
+#*fvwmpagerdesktopscale 50
+*fvwmpagerballoons
+#*fvwmpagerballoonfont "xft:Verdana:Medium:Roman:size=8"
+*fvwmpagerballoonfont "nexus"
+*fvwmpagerballoonfore #bbbbbb
+
+*fvwmiconman: resolution                page
+*fvwmiconman: usewinlist                true
+*fvwmiconman: drawicons                 false
+*fvwmiconman: followfocus               true
+*fvwmiconman: sort                      none
+*fvwmiconman: font "nexus"
+*fvwmiconman: iconbutton                flat white black
+*fvwmiconman: plainbutton               flat white grey10
+*fvwmiconman: focusbutton               flat white grey20
+*fvwmiconman: focusandselectbutton      flat black white
+*fvwmiconman: selectbutton              flat grey20 grey80
+*fvwmiconman: titlebutton               flat grey20 black
+*fvwmiconman: reliefthickness           1
+piperead 'echo \\*FvwmIconMan: ManagerGeometry 200x1+$(($[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
+*fvwmiconman: buttongeometry            1x24
+*fvwmiconman: background black
+*fvwmiconman: drawicons always
+*fvwmiconman: shownoicons false
+*fvwmiconman: showonlyicons false
+*fvwmiconman: maxbuttonwidth 24
+*fvwmiconman: format ""
+
+# 20100808 - moved stalonetray to FvwmButtons
+destroymoduleconfig fvwmbuttons*
+*fvwmbuttons: Back black
+*fvwmbuttons: (Frame 0, Swallow (NoClose,UseOld) `stalonetray` `exec exec stalonetray -bg black -geometry 5x1+0-0 --kludges force_icons_size`)
+
+# fvwm2 local settings
+piperead '[ ! -f ${HOME}/.fvwm2rc.local ] || echo read ${HOME}/.fvwm2rc.local'
+
+# 20091030 - removed window saver
+# 20090729 - added window saver
+#piperead '~/.fvwm/ws.sh init'
+# 20090811 - ported window saver from bourne shell to perl
+#module FvwmPerl -e 'load(".fvwm2rc.pl")'
+
+# vim:set ft=fvwm:
+# vi:set ts=4 sw=4 et:
