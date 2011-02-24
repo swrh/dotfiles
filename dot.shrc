@@ -1,0 +1,68 @@
+# dot.shrc
+
+# If not running interactively, don't do anything.
+[ ! -z "${PS1}" ] || return
+
+# Remove `command_not_found_handle' feature on Ubuntu. Used when a wrong
+# command is typed and takes a loooooooong time to return to the prompt on slow
+# machines.
+unset command_not_found_handle
+
+# `$PROMPT_COMMAND' is run at every command. Don't like it, don't want it.
+unset PROMPT_COMMAND
+
+# Enable color support of `ls' and add handy aliases.
+if [ "${TERM}" != "dumb" ]; then
+	if which dircolors > /dev/null; then
+		eval "`dircolors -b`"
+	fi
+
+	alias l='ls -lavF --color=auto'
+	alias g='grep --color=auto'
+else
+	alias l='ls -lavF'
+	alias g='grep'
+fi
+
+# Set the favorite editor.
+if which vim > /dev/null; then
+	EDITOR="vim"
+	export EDITOR
+elif which vi > /dev/null; then
+	EDITOR="vi"
+	export EDITOR
+fi
+
+# `vi' mode on.
+set -o vi
+
+# Cool and simple PS1.
+PS1="\\h\\$ "
+case "${TERM}" in
+xterm*|rxvt*|screen*)
+	tty="`tty`"
+	PS1="${PS1}\\[\\e]0;\\u@\\h: \\w (${tty#/dev/})\\a\\]"
+	;;
+*)
+	;;
+esac
+
+# Debian only: recognize what `chroot' you're currently working in.
+if [ -z "${debian_chroot}" -a -r /etc/debian_chroot ]; then
+	debian_chroot="`cat /etc/debian_chroot`"
+fi
+if [ ! -z "${debian_chroot}" ]; then
+	PS1="(${debian_chroot})${PS1}"
+fi
+
+# Don't recycle history too often.
+HISTSIZE=32767
+HISTFILESIZE=32767
+
+# Load local shell resources.
+[ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
+
+# Load bash resources if we're using it.
+[ -z "${BASH}" -o ! -f "${HOME}/.bashrc" ] || . "${HOME}/.bashrc"
+
+# vim:set ft=sh:
