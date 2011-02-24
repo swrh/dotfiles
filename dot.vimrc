@@ -1,11 +1,9 @@
 " dot.vimrc
 "
-" $Id: d5c7a4eca591cf9a9a9eda8594b14116f7430132 $
-"
 " configuration file for vim
 " written for Debian GNU/Linux by W.Akkerman <wakkerma@debian.org>
 " some modifications by J.H.M. Dassen <jdassen@wi.leidenuniv.nl>
-" personalized by Fernando Silveira <fsilveira@gmail.com>
+" even more modifications by Fernando Silveira <fsilveira@gmail.com>
 
 " normally we use vim-extensions. if you want true vi-compatibility
 " comment the following statements
