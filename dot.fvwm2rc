@@ -161,6 +161,7 @@ style "beep-media-player" startsondesk $[LASTPAGE], notitle
 style "xmms"            startsondesk $[LASTPAGE], notitle
 # 20100808 - added new "empathy" style
 style "empathy"         startsondesk $[LASTPAGE]
+style "MPlayer"         notitle
 
 # desktop: private
 style "Icedove*"        startsondesk 8, notitle
