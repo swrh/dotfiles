@@ -268,10 +268,20 @@ key f10     a   ms  maximize grow grow
 key f11     a   ms  maximize 0 100
 key f12     a   ms  maximize 100 0
 # 20101002 - added new window maximization bindings
-key l       a   ms  maximize grow 0
-key h       a   ms  maximize grow 0
-key k       a   ms  maximize 0 grow
-key j       a   ms  maximize 0 grow
+key l       a   ms  maximize growright 0
+key h       a   ms  maximize growleft 0
+key k       a   ms  maximize 0 growup
+key j       a   ms  maximize 0 growdown
+
+key KP_Home a   ms  maximize growleft growup
+key KP_Up   a   ms  maximize 0 growup
+key KP_Page_Up a ms maximize growright growup
+key KP_Right a  ms  maximize growright 0
+key KP_Page_Down a ms maximize growright growdown
+key KP_Down a   ms  maximize 0 growdown
+key KP_End  a   ms  maximize growleft growdown
+key KP_Left a   ms  maximize growleft 0
+key KP_5    a   ms  maximize grow grow
 
 # desktop keys
 key 1       a   cm  goto-desk 0 0
@@ -331,6 +341,18 @@ key t       a   cms move -0p -0p
 key r       a   cm  resize 80c 24c
 key w       a   cm  resize keep w+1c
 key w       a   cms resize keep w-1c
+
+key KP_Page_Down a cms move -0p -0p
+key KP_Page_Up a cms move -0p 0p
+key KP_End  a   cms move 0p -0p
+key KP_Home a   cms move 0p 0p
+
+key KP_Right a  cms move -0p 50-50w
+key KP_Left a   cms move 0p 50-50w
+key KP_Up   a   cms move 50-50w 0p
+key KP_Down a   cms move 50-50w -0p
+
+key KP_5 a cms move 50-50w 50-50w
 
 # other
 key x       a   cms exec exec xterm
