@@ -6,3 +6,7 @@ xterm
 root-tail
 slock
 dmenu
+ctags
+sudo
+subversion
+cvs
