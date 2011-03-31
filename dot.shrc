@@ -56,8 +56,8 @@ if [ ! -z "${debian_chroot}" ]; then
 fi
 
 # Don't recycle history too often.
-HISTSIZE=32767
-HISTFILESIZE=32767
+HISTSIZE=65535
+HISTFILESIZE=65535
 
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
