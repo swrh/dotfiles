@@ -11,6 +11,9 @@ HISTCONTROL="ignoredups:ignorespace"
 # of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Disable stupid bash completion.
+complete -r `complete | rev | cut -d' ' -f1 | rev`
+
 # Load local bash shell resources.
 [ ! -f "${HOME}/.bashrc-local" ] || . "${HOME}/.bashrc-local"
 
