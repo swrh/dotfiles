@@ -1,0 +1,13 @@
+# .inputrc
+
+# Be 8 bit clean.
+set input-meta on
+set output-meta on
+
+# `vi' mode on.
+set editing-mode vi
+set keymap vi
+
+# Do not bell on tab-completion.
+set bell-style none
+set bell-style visible
