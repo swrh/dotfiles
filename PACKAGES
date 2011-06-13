@@ -14,3 +14,6 @@ tree
 stalonetray
 fdupes
 tofrodos
+rsync
+gdb
+build-essential
