@@ -1,4 +1,4 @@
-#!/bin/sh -ex
+#!/bin/sh -e
 
 warn()
 {
@@ -14,15 +14,44 @@ err()
 usage()
 {
 	[ $# -eq 0 ] || warn "$*"
-	echo "usage: $0 HOST" 1>&2
+	echo "usage: $0 [-r REMOTEHOST] [-d DESTDIR]" 1>&2
 	exit 1
 }
 
 CMD="${0##*/}"
 
-[ $# -eq 1 ] || usage "invalid number of arguments"
+PARSED=`getopt -o 'd:r:' -- "$@"`
+[ $? -eq 0 ] || usage
 
-HOST="$1"
+eval set -- "$PARSED"
+
+DESTDIR=""
+REMOTEHOST=""
+
+while [ $# -gt 0 ]; do
+	case "$1" in
+	-d) DESTDIR="$2"; shift 2 ;;
+	-r) REMOTEHOST="$2"; shift 2 ;;
+	--) shift 1; break ;;
+	*) usage "internal error at $LINENO" ;;
+	esac
+done
+
+[ $# -eq 0 ] || usage "excess arguments ($#:$*)"
+
+if [ "$REMOTEHOST" = "" ]; then
+	if [ "$DESTDIR" = "" ]; then
+		usage "you must specify the \`-r' and/or \`-d' arguments"
+	fi
+
+	if [ ! -d "$DESTDIR" ]; then
+		err "path \`$DESTDIR' is not a valid directory"
+	fi
+else
+	if [ "$DESTDIR" = "" ]; then
+		DESTDIR="."
+	fi
+fi
 
 cd "`dirname "$0"`"
 
@@ -42,6 +71,9 @@ for f in dot.*; do
 	tar -rf "$PKGFILE" -C "$WORKDIR" "$g" || err "error packaging dotfile"
 done
 
-gzip -9 "$PKGFILE" || err "error compressing dotfiles package"
-
-ssh "$HOST" tar -xzf - < "$PKGFILE.gz" || err "error uploading dotfiles"
+if [ "$REMOTEHOST" = "" ]; then
+	tar -xf "$PKGFILE" -C "$DESTDIR" || err "error uploading dotfiles"
+else
+	gzip "$PKGFILE" || err "error compressing dotfiles package"
+	ssh "$REMOTEHOST" "tar -xzf - -C '$DESTDIR'" < "$PKGFILE.gz" || err "error uploading dotfiles"
+fi
