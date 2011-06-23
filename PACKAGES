@@ -17,3 +17,10 @@ tofrodos
 rsync
 gdb
 build-essential
+patch
+pmount
+alsa-utils
+ntfs-3g
+unrar
+unzip
+zip
