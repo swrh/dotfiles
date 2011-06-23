@@ -28,4 +28,6 @@ if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
 fi
 
+PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+
 # vim:set ft=sh:
