@@ -12,7 +12,7 @@ HISTCONTROL="ignoredups:ignorespace"
 shopt -s checkwinsize
 
 # Disable stupid bash completion.
-complete -r `complete | rev | cut -d' ' -f1 | rev`
+complete -r
 
 # Load local bash shell resources.
 [ ! -f "${HOME}/.bashrc-local" ] || . "${HOME}/.bashrc-local"
