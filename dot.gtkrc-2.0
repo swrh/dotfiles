@@ -1,0 +1,8 @@
+# dot.gtkrc-2.0
+#
+# $Id: 7b01e92f8642fd514e7595aa69b6d2c80cf5d058 $
+
+include "/usr/share/themes/Mist/gtk-2.0/gtkrc"
+gtk-font-name = "Bitstream Vera Sans 8"
+
+# vim:set ft=gtkrc:
