@@ -24,3 +24,5 @@ ntfs-3g
 unrar
 unzip
 zip
+dosfstools
+dos2unix
