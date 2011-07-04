@@ -26,3 +26,5 @@ unzip
 zip
 dosfstools
 dos2unix
+git-svn
+sshfs
