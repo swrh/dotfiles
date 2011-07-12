@@ -29,3 +29,13 @@ dos2unix
 git-svn
 sshfs
 gtk2-engines
+debootstrap
+pv
+x2x
+screen
+tcpdump
+wireshark
+valgrind
+sun-java6-plugin
+mencoder
+mplayer
