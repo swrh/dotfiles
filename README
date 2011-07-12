@@ -1,0 +1,7 @@
+Problem with "xfonts-nexus" on Ubuntu: after installing the font package, it
+won't be available in the system untill you run the command below:
+
+  $ sudo update-fonts-alias /usr/share/fonts/X11/misc
+
+vim:set et:
+vi:set sw=2:
