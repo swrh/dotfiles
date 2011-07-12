@@ -352,17 +352,17 @@ key KP_Left a   cms move 0p 50-50w
 key KP_Up   a   cms move 50-50w 0p
 key KP_Down a   cms move 50-50w -0p
 
-key KP_5 a cms move 50-50w 50-50w
+key KP_5    a   cms move 50-50w 50-50w
 
 # other
 key x       a   cms exec exec xterm
 key v       a   cms exec exec rxvt
 key delete  a   cm  lock-x
 
-key XF86AudioPlay           a   n   exec exec xmms2 toggleplay
-key XF86AudioStop           a   n   exec exec xmms2 stop
-key XF86AudioPrev           a   n   exec exec xmms2 prev
-key XF86AudioNext           a   n   exec exec xmms2 next
+key XF86AudioPlay           a   n   exec exec nyxmms2 toggle
+key XF86AudioStop           a   n   exec exec nyxmms2 stop
+key XF86AudioPrev           a   n   exec exec nyxmms2 prev
+key XF86AudioNext           a   n   exec exec nyxmms2 next
 key XF86AudioLowerVolume    a   n   exec exec amixer sset PCM 5%-
 key XF86AudioRaiseVolume    a   n   exec exec amixer sset PCM 5%+
 key XF86Mail                a   n   exec exec xterm -e mutt
