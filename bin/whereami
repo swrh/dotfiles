@@ -1,0 +1,12 @@
+#!/bin/sh
+
+HOSTNAME="`hostname`"
+
+case "${HOSTNAME}" in
+lui5i|berry|grape|onion)
+	echo "${HOSTNAME}"
+	;;
+*)
+	echo unknown
+	;;
+esac

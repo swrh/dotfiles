@@ -1,0 +1,7 @@
+#!/bin/sh -ex
+
+if [ $# -eq 0 ]; then
+	set -- -type f
+fi
+
+find "$@" -printf '%20s %p\n' | sort -n | cut -b22- | tr '\n' '\000' | xargs -0 ls -lavFSr --color=auto

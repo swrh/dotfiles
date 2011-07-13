@@ -1,0 +1,61 @@
+#!/bin/bash -e
+
+unset LOGFILE SCREEN
+declare -a LOGFILE SCREEN
+
+unset i n scr nscreens nlogfiles
+declare -i i n scr nscreens nlogfiles
+
+# load log files list
+i=0
+for f in /var/log/{messages,syslog,kern.log,daemon.log,auth.log}; do
+	LOGFILE[$((i++))]="${f}"
+done
+
+# load screens list
+if ! xinerama-info > /dev/null 2>&1; then
+	SCREEN[0]="`xwininfo -root | awk '/^[ \t]*-geometry[ \t]/{ print $2; }'`"
+else
+	eval `xinerama-info | awk '/^Xinerama screen [0-9]+:/{ printf("SCREEN[%d]=\"%s\"; ", $3, $4); } END{ print(""); }'`
+fi
+
+# fix screen sizes and positions
+i=0
+while [ ${i} -lt ${#SCREEN[@]} ]; do
+	s="${SCREEN[${i}]}"
+
+	w="${s%x*}"
+	h="${s%%+*}"; h="${h#*x}"
+	x="${s%+*}"; x="${x#*+}"
+	y="${s##*+}"
+
+	nw=$((${w} - 100))
+	nh=$((${h} - 100))
+	nx=$((${x} + 50))
+	ny=$((${y} + 50))
+
+	ns="${nw}x${nh}+${nx}+${ny}"
+
+	echo s=${s} w=${w} h=${h} x=${x} y=${y} nw=${nw} nh=${nh} nx=${nx} ny=${ny} ns=${ns}
+
+	SCREEN[${i}]="${ns}"
+	i=$((${i} + 1))
+done
+
+# run root-tail
+while [ ${#SCREEN[@]} -gt 0 -a ${#LOGFILE[@]} -gt 0 ]; do
+	unset logs
+	declare -a logs
+
+	n=$((${#LOGFILE[@]} / ${#SCREEN[@]}))
+	while [ ${n} -gt 0 ]; do
+		n=$((${n} - 1))
+		i=$((${#LOGFILE[@]} - 1))
+		logs[${n}]="${LOGFILE[${i}]}"
+		unset LOGFILE[${i}]
+	done
+
+	i=$((${#SCREEN[@]} - 1))
+	root-tail "$@" -geometry "${SCREEN[${i}]}" "${logs[@]}" &
+	unset SCREEN[${i}]
+done

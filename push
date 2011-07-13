@@ -71,6 +71,10 @@ for f in dot.*; do
 	tar -rf "$PKGFILE" -C "$WORKDIR" "$g" || err "error packaging dotfile"
 done
 
+for f in bin/*; do
+	tar -rf "$PKGFILE" "$f" || err "error packaging dotfile"
+done
+
 if [ "$REMOTEHOST" = "" ]; then
 	tar -xf "$PKGFILE" -C "$DESTDIR" || err "error uploading dotfiles"
 else
