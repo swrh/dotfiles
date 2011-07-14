@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sleep 1
+xset dpms force standby
+if which gnome-screensaver-command > /dev/null; then
+	exec gnome-screensaver-command --lock
+else
+	exec slock
+fi

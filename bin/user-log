@@ -1,0 +1,4 @@
+#!/bin/sh
+
+time="`date +'%Y%m%d %H:%M:%S%n'`"
+echo "$time $*" | tee -a ~/.user-log
