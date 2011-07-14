@@ -392,7 +392,7 @@ addtomenu   menu-root "fvwm2" title
 destroymenu menu-utils
 addtomenu   menu-utils
 +   "fvwmconsole"   module FvwmConsole
-+   "xlock"         exec exec xlock
++   "x-lock"        exec exec x-lock
 
 destroymenu menu-office
 addtomenu   menu-office
@@ -514,7 +514,8 @@ addtomenu   menu-quit
 destroyfunc lock-x
 addtofunc   lock-x
 #+ "i" exec date +'%nswrh: screen locked at %Y%m%d %H:%M:%S%n'; sleep 1; xset dpms force standby; slock; date +'%nswrh: screen unlocked at %Y%m%d %H:%M:%S%n'
-+ "i" exec workstation-log "screen locked"; sleep 1; xset dpms force standby; slock; workstation-log "screen unlocked"
+#+ "i" exec user-log "screen locked"; sleep 1; xset dpms force standby; slock; user-log "screen unlocked"
++ "i" exec user-log "fvwm: screen locked"; x-lock; user-log "fvwm: screen unlocked"
 
 destroyfunc moveto-desk
 addtofunc   moveto-desk
@@ -604,14 +605,14 @@ destroyfunc initfunction
 addtofunc   initfunction
 # 20090814 - now log at what time we did what
 #+ "i" exec exec date +'%nswrh: fvwm started at %Y%m%d %H:%M:%S%n'
-+ "i" exec exec workstation-log "fvwm started"
++ "i" exec exec user-log "fvwm: fvwm started"
 + "i" exec exec xsetroot -solid \#000000
 # 20090722 - there is no need to hide e-mail or chat windows: show all pages in
 # the pager
 + "i" module FvwmPager 0 $[LASTPAGE]
 + "i" module FvwmIconMan
 + "i" module FvwmCommandS
-+ "i" exec exec xinerama-root-tail -fn nexus --color '#cccccc'
++ "i" exec exec x-log-tail -fn nexus --color '#cccccc'
 + "i" exec exec xclock -d -geometry $[XCLOCKWIDTH]x$[PAGERHEIGHT]+$[STALONETRAYWIDTH]-0 -strftime '%Y%m%d %H:%M' -face sans-serif:size=8
 # 20100808 - moved stalonetray to FvwmButtons
 + "i" module FvwmButtons -g $[STALONETRAYWIDTH]x$[PAGERHEIGHT]+0-0
@@ -622,7 +623,7 @@ destroyfunc restartfunction
 addtofunc   restartfunction
 # 20090814 - now log at what time we did what
 #+ "i" exec exec date +'%nswrh: fvwm restarted at %Y%m%d %H:%M:%S%n'
-+ "i" exec exec workstation-log "fvwm restarted"
++ "i" exec exec user-log "fvwm: fvwm restarted"
 # 20090722 - there is no need to hide e-mail or chat windows: show all pages in
 # the pager
 + "i" module FvwmPager 0 $[LASTPAGE]
@@ -632,7 +633,7 @@ addtofunc   restartfunction
 destroyfunc exitfunction
 addtofunc   exitfunction
 #+ "i" exec exec date +'%nswrh: fvwm exited at %Y%m%d %H:%M:%S%n'
-+ "i" exec exec workstation-log "fvwm exited"
++ "i" exec exec user-log "fvwm: fvwm exited"
 
 *fvwmpagerrows 1
 # 20090722 - there is no need to hide e-mail or chat windows: show all pages in
