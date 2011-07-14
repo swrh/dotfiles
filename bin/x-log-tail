@@ -9,6 +9,7 @@ declare -i i n scr nscreens nlogfiles
 # load log files list
 i=0
 for f in /var/log/{messages,syslog,kern.log,daemon.log,auth.log}; do
+	[ -r "${f}" ] || continue
 	LOGFILE[$((i++))]="${f}"
 done
 
