@@ -58,6 +58,9 @@ fi
 # Don't recycle history too often.
 HISTSIZE=65535
 HISTFILESIZE=65535
+# Use a different history file to be sure that it will only be used when
+# HISTSIZE and HISTFILESIZE are set with 65535.
+HISTFILE="${HOME}/.sh_history"
 
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
