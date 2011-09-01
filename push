@@ -79,5 +79,5 @@ if [ "$REMOTEHOST" = "" ]; then
 	tar -xf "$PKGFILE" -C "$DESTDIR" || err "error uploading dotfiles"
 else
 	gzip "$PKGFILE" || err "error compressing dotfiles package"
-	ssh "$REMOTEHOST" "tar -xzf - -C '$DESTDIR'" < "$PKGFILE.gz" || err "error uploading dotfiles"
+	ssh "$REMOTEHOST" "tar --no-same-owner --touch -xzf - -C '$DESTDIR'" < "$PKGFILE.gz" || err "error uploading dotfiles"
 fi
