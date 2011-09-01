@@ -40,8 +40,10 @@ set -o vi
 PS1="\\h\\$ "
 case "${TERM}" in
 xterm*|rxvt*|screen*)
-	tty="`tty`"
-	PS1="${PS1}\\[\\e]0;\\u@\\h: \\w (${tty#/dev/})\\a\\]"
+	PS1="${PS1}\\[\\e]0;\\u@\\h: \\w"
+	tty="`tty 2>/dev/null`"
+	[ $? -ne 0 ] || PS1="${PS1} (${tty#/dev/})"
+	PS1="${PS1}\\a\\]"
 	;;
 *)
 	;;
