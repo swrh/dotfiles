@@ -33,6 +33,12 @@ elif which vi > /dev/null 2>&1; then
 	export EDITOR
 fi
 
+# Set the favorite pager.
+if which less > /dev/null 2>&1; then
+	PAGER="less"
+	export PAGER
+fi
+
 # `vi' mode on.
 set -o vi
 
