@@ -20,7 +20,7 @@ usage()
 
 CMD="${0##*/}"
 
-PARSED=`getopt -o 'd:r:' -- "$@"`
+PARSED=`getopt 'd:r:' "$@"`
 [ $? -eq 0 ] || usage
 
 eval set -- "$PARSED"
@@ -63,21 +63,28 @@ WORKDIR="$TMPDIR/work"
 mkdir -p "$WORKDIR" || err "error creating temporary work directory"
 
 PKGFILE="$TMPDIR/dotfiles.tar"
-touch "$PKGFILE" || err "error creating temporary dotfiles package"
 
+tarcmd="c"
 for f in dot.*; do
 	g=".${f#dot.}"
 	cp -p "$f" "$WORKDIR/$g" || err "error copying dotfile"
-	tar -rf "$PKGFILE" -C "$WORKDIR" "$g" || err "error packaging dotfile"
+	tar -${tarcmd}f "$PKGFILE" -C "$WORKDIR" "$g" || err "error packaging dotfile"
+	if [ $tarcmd = c ]; then
+		tarcmd="r"
+	fi
 done
 
 for f in bin/*; do
-	tar -rf "$PKGFILE" "$f" || err "error packaging dotfile"
+	tar -${tarcmd}f "$PKGFILE" "$f" || err "error packaging dotfile"
+	if [ $tarcmd = c ]; then
+		tarcmd="r"
+	fi
 done
 
 if [ "$REMOTEHOST" = "" ]; then
 	tar -xf "$PKGFILE" -C "$DESTDIR" || err "error uploading dotfiles"
 else
 	gzip "$PKGFILE" || err "error compressing dotfiles package"
-	ssh "$REMOTEHOST" "tar --no-same-owner --touch -xzf - -C '$DESTDIR'" < "$PKGFILE.gz" || err "error uploading dotfiles"
+	# Add `--no-same-owner' when using GNU tar?
+	ssh "$REMOTEHOST" "tar -m -xzf - -C '$DESTDIR'" < "$PKGFILE.gz" || err "error uploading dotfiles"
 fi
