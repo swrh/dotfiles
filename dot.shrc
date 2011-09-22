@@ -13,7 +13,7 @@ unset PROMPT_COMMAND
 
 # Enable color support of `ls' and add handy aliases.
 if [ "${TERM}" != "dumb" ]; then
-	if which dircolors > /dev/null; then
+	if which dircolors > /dev/null 2>&1; then
 		eval "`dircolors -b`"
 	fi
 
@@ -25,10 +25,10 @@ else
 fi
 
 # Set the favorite editor.
-if which vim > /dev/null; then
+if which vim > /dev/null 2>&1; then
 	EDITOR="vim"
 	export EDITOR
-elif which vi > /dev/null; then
+elif which vi > /dev/null 2>&1; then
 	EDITOR="vi"
 	export EDITOR
 fi
