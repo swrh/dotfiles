@@ -11,17 +11,23 @@ unset command_not_found_handle
 # `$PROMPT_COMMAND' is run at every command. Don't like it, don't want it.
 unset PROMPT_COMMAND
 
-# Enable color support of `ls' and add handy aliases.
+# Enable color support of `ls'.
+ls_args=""
+if ls -dv / > /dev/null 2>&1; then
+	ls_args="${ls_args} -v"
+fi
 if [ "${TERM}" != "dumb" ]; then
 	if which dircolors > /dev/null 2>&1; then
 		eval "`dircolors -b`"
 	fi
 
-	alias l='ls -lavF --color=auto'
-	alias g='grep --color=auto'
+	if ls -d --color=auto / > /dev/null 2>&1; then
+		ls_args="${ls_args} --color=auto"
+	fi
+
+	alias l="ls -laF${ls_args}"
 else
-	alias l='ls -lavF'
-	alias g='grep'
+	alias l="ls -laF${ls_args}"
 fi
 
 # Set the favorite editor.
