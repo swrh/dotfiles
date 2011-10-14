@@ -2,6 +2,9 @@
 #
 # This configuration file is been made for FVWM 2.5.26 packaged by Debian.
 
+# 20111013 fvwm-icons stores the icons in a non-default path
+imagepath /usr/share/pixmaps/fvwm
+
 ignoremodifiers l25
 desktopsize 1x1
 #defaultfont "xft:Verdana:Medium:Roman:size=8"
