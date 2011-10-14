@@ -36,7 +36,6 @@ screen
 tcpdump
 wireshark
 valgrind
-sun-java6-plugin
 mencoder
 mplayer
 unaccent
