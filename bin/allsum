@@ -1,8 +1,78 @@
 #!/bin/bash
 
-pv "$1" | tee \
-	>({ md5sum    - | cut -d- -f1 | tr -d '\n'; echo "$1"; } > "$1.md5") \
-	>({ sha1sum   - | cut -d- -f1 | tr -d '\n'; echo "$1"; } > "$1.sha1") \
-	>({ sha256sum - | cut -d- -f1 | tr -d '\n'; echo "$1"; } > "$1.sha256") \
-	>({ sha512sum - | cut -d- -f1 | tr -d '\n'; echo "$1"; } > "$1.sha512") \
-	> /dev/null
+CMD="${0##*/}"
+
+usage()
+{
+	echo "usage: $CMD [-hVpv] FILES..." 1>&2
+	exit 1
+}
+
+help()
+{
+	cat << EOF
+usage: $CMD [-hVpv] FILES...
+Generate all checksums (or hash sums) possible. Currently supported are MD5
+(md5sum), SHA1 (sha1sum), SHA256 (sha256sum) and SHA512 (sha512sum).
+
+  -h    show this help message and exit
+  -V    show version information and exit
+  -p    show progress var
+  -v    be verbose
+
+Please report any bugs to Fernando Silveira <fsilveira@gmail.com>.
+EOF
+	exit 0
+}
+
+sum()
+{
+	typ="$1"
+	file="$2"
+
+	"${typ}sum" - | cut -d- -f1 | tr -d '\n'
+	echo "$file"
+}
+
+main()
+{
+	progress=0
+	verbose=0
+
+	while getopts "hVpv" opt; do
+		case $opt in
+		h) help ;;
+		V) echo "$CMD v0.2"; exit 0 ;;
+		p) progress=1 ;;
+		v) verbose=1 ;;
+		?) usage ;;
+		esac
+	done
+
+	shift $(($OPTIND - 1))
+
+	if [ $# -le 0 ]; then
+		echo "$CMD: missing files arguments" 1>&2
+		exit 1
+	fi
+
+	if [ $progress -eq 0 ]; then
+		cat=cat
+	else
+		cat=pv
+	fi
+
+	for file in "$@"; do
+		if [ $verbose -ne 0 ]; then
+			echo "$file"
+		fi
+		$cat "$file" | tee \
+			>(sum md5 "$file" > "$file.md5") \
+			>(sum sha1 "$file" > "$file.sha1") \
+			>(sum sha256 "$file" > "$file.sha256") \
+			>(sum sha512 "$file" > "$file.sha512") \
+			> /dev/null
+	done
+}
+
+main "$@"
