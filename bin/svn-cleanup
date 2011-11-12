@@ -1,0 +1,3 @@
+#!/bin/sh
+
+svn status --no-ignore | awk '$1=="?"||$1=="I" { print $2 }' | xargs rm -rvf
