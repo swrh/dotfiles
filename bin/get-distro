@@ -1,0 +1,63 @@
+#!/bin/bash
+
+get_debian_name()
+{
+	local ver="`cat /etc/debian_version`"
+	if [ $? -ne 0 ]; then
+		echo "unknown"
+		return 1
+	fi
+
+	if [ "${ver#4.}" != "$ver" ]; then
+		echo "etch"
+		return 0
+	elif [ "${ver#5.}" != "$ver" ]; then
+		echo "lenny"
+		return 0
+	elif [ "${ver#6.}" != "$ver" ]; then
+		echo "squeeze"
+		return 0
+	fi
+
+	echo "unknown"
+	return 1
+}
+
+get_distro()
+{
+	if [ -f /etc/debian_version ]; then
+		get_debian_name
+		return 0
+	fi
+
+	echo "unknown"
+	return 1
+}
+
+get_arch()
+{
+	local bits="`getconf LONG_BIT`"
+	if [ $? -ne 0 ]; then
+		echo "unknown"
+		return 1
+	fi
+
+	if [ "$bits" = "32" ]; then
+		echo "i686"
+	else
+		echo "amd64"
+	fi
+
+	return 0
+}
+
+ret=0
+distro="`get_distro`"
+r=$?
+[ $r -eq 0 ] || ret=$r
+arch="`get_arch`"
+r=$?
+[ $r -eq 0 ] || ret=$r
+
+echo "$distro-$arch"
+exit $ret
