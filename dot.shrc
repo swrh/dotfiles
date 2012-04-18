@@ -1,7 +1,7 @@
 # dot.shrc
 
 # If not running interactively, don't do anything.
-[ ! -z "${PS1}" ] || return
+[ ! -z "${PS1}" ] || return 0
 
 # Remove `command_not_found_handle' feature on Ubuntu. Used when a wrong
 # command is typed and takes a loooooooong time to return to the prompt on slow
