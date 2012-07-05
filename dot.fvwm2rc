@@ -26,6 +26,7 @@ desktopname 9 chat
 setenv NOPAGES 10
 setenv PAGERHEIGHT 28
 setenv XCLOCKWIDTH 106
+setenv ICONMANWIDTH 200
 
 piperead 'echo setenv LASTPAGE $(($[NOPAGES] - 1))'
 # calculate pager width based on its height
@@ -621,6 +622,7 @@ addtofunc   initfunction
 + "i" module FvwmButtons -g $[STALONETRAYWIDTH]x$[PAGERHEIGHT]+0-0
 + "i" exec sleep 3; exec nm-applet
 + "i" exec sleep 3; exec gnome-power-manager
+piperead 'which xosview > /dev/null && echo + \"i\" exec exec xosview +battery +net -interrupts -page -swap -cpu -captions -mem -load -disk -wireless -geometry +$(($[ICONMANWIDTH] + $[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
 
 destroyfunc restartfunction
 addtofunc   restartfunction
@@ -668,7 +670,7 @@ addtofunc   exitfunction
 *fvwmiconman: selectbutton              flat grey20 grey80
 *fvwmiconman: titlebutton               flat grey20 black
 *fvwmiconman: reliefthickness           1
-piperead 'echo \\*FvwmIconMan: ManagerGeometry 200x1+$(($[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
+piperead 'echo \\*FvwmIconMan: ManagerGeometry $[ICONMANWIDTH]x1+$(($[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
 *fvwmiconman: buttongeometry            1x24
 *fvwmiconman: background black
 *fvwmiconman: drawicons always
