@@ -26,7 +26,7 @@ desktopname 9 chat
 setenv NOPAGES 10
 setenv PAGERHEIGHT 28
 setenv XCLOCKWIDTH 106
-setenv ICONMANWIDTH 200
+setenv ICONMANWIDTH 150
 
 piperead 'echo setenv LASTPAGE $(($[NOPAGES] - 1))'
 # calculate pager width based on its height
@@ -147,10 +147,6 @@ style "xterm"           notitle, borderwidth 1, handlewidth 1, \
                         miniicon mini.term.xpm
 
 style "rxvt"            notitle
-style "xconsole"        sticky, notitle, windowlistskip, circulateskip, \
-                        borderwidth 0, handlewidth 0
-style "xclock"          sticky, notitle, windowlistskip, circulateskip, \
-                        borderwidth 0, handlewidth 0
 # 20091124 - added "stalonetray" style
 # 20100808 - moved stalonetray to fvwmbuttons
 
@@ -180,7 +176,6 @@ style "Mozilla*"        startsondesk 7, notitle
 style "Netscape*"       startsondesk 7, notitle
 style "dillo"           startsondesk 7
 style "*Google Chrome*" startsondesk 7, notitle
-# 20100808 - added "*Chromium*" style
 style "*Chromium*"      startsondesk 7, notitle
 
 # desktop: office
@@ -190,16 +185,19 @@ style "BrOffice.org*"   startsondesk 6
 style "*FreeMind*"      startsondesk 6
 
 # no desktop
-style "gkrellm"         sticky, staysontop, notitle, circulateskip
-style "xosview"         sticky, staysontop, notitle, windowlistskip, \
-                        circulateskip, borderwidth 0, handlewidth 0
-style "FvwmPager"       sticky, handlewidth 0, borderwidth 0, notitle, \
-                        windowlistskip, circulateskip
-# 20100808 - added "FvwmButtons" style
-style "FvwmButtons"     sticky, handlewidth 0, borderwidth 0, notitle, \
-                        windowlistskip, circulateskip
-style "FvwmIconMan"     sticky, notitle, windowlistskip, circulateskipicon, \
-                        circulateskip, nohandles, borderwidth 0, \
+style "gkrellm"         sticky, notitle, circulateskip, staysontop
+style "xconsole"        sticky, notitle, circulateskip, windowlistskip, \
+                        borderwidth 0, handlewidth 0
+style "xclock"          sticky, notitle, circulateskip, windowlistskip, \
+                        borderwidth 0, handlewidth 0
+style "xosview"         sticky, notitle, circulateskip, windowlistskip, \
+                        borderwidth 0, handlewidth 0
+style "FvwmPager"       sticky, notitle, circulateskip, windowlistskip, \
+                        borderwidth 0, handlewidth 0
+style "FvwmButtons"     sticky, notitle, circulateskip, windowlistskip, \
+                        borderwidth 0, handlewidth 0
+style "FvwmIconMan"     sticky, notitle, circulateskip, windowlistskip, \
+                        borderwidth 0, circulateskipicon, nohandles, \
                         fixedposition, fixedsize, !iconifiable, \
                         staysonbottom, neverfocus
 
@@ -622,7 +620,7 @@ addtofunc   initfunction
 + "i" module FvwmButtons -g $[STALONETRAYWIDTH]x$[PAGERHEIGHT]+0-0
 + "i" exec sleep 3; exec nm-applet
 + "i" exec sleep 3; exec gnome-power-manager
-piperead 'which xosview > /dev/null && echo + \"i\" exec exec xosview +battery +net -interrupts -page -swap -cpu -captions -mem -load -disk -wireless -geometry +$(($[ICONMANWIDTH] + $[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
+piperead 'which xosview > /dev/null || exit; [ -e /proc/acpi/battery ] && op="+" || op="-"; args="${op}battery"; echo + \"i\" exec exec xosview +net -interrupts -page -swap -cpu -captions -mem -load -disk -wireless $args -geometry x$[PAGERHEIGHT]+$(($[ICONMANWIDTH] + $[STALONETRAYWIDTH] + $[XCLOCKWIDTH]))-0'
 
 destroyfunc restartfunction
 addtofunc   restartfunction
