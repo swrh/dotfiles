@@ -140,5 +140,17 @@ if has("gui")
   set guifont=courier_new:h9
 endif
 
+func GitGrep(...)
+  let save = &grepprg
+  set grepprg=git\ grep\ -n\ $*
+  let s = 'grep'
+  for i in a:000
+    let s = s . ' ' . i
+  endfor
+  exe s
+  let &grepprg = save
+endfun
+command -nargs=? G call GitGrep(<f-args>)
+
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
