@@ -45,7 +45,13 @@ if [ $# -eq 0 ]; then
 	exit 1
 fi
 
-git filter-branch --index-filter "git rm -fr --cached --ignore-unmatch $*" HEAD
+gfb_args=""
+if [ $# -gt 1 -a "$1" = "-f" ]; then
+	gfb_args="-f"
+	shift
+fi
+
+git filter-branch $gfb_args --index-filter "git rm -fr --cached --ignore-unmatch $*" HEAD
 rm -fr .git/refs/original
-git reflog expire --all
-git gc --aggressive --prune
+git reflog expire --expire=now --all
+git gc --aggressive --prune=now
