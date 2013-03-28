@@ -70,10 +70,10 @@ if [ ! -z "${debian_chroot}" ]; then
 fi
 
 # Don't recycle history too often.
-HISTSIZE=262143
-HISTFILESIZE=262143
+HISTSIZE=524288
+HISTFILESIZE=524288
 # Use a history file name different from the default to make sure that it will
-# only be used when HISTSIZE and HISTFILESIZE are set with 262143.
+# only be used when HISTSIZE and HISTFILESIZE are set with 524288.
 HISTFILE="${HOME}/.sh_history"
 
 # Load local shell resources.
