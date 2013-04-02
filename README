@@ -1,5 +1,5 @@
 Problem with "xfonts-nexus" on Ubuntu: after installing the font package, it
-won't be available in the system untill you run the command below:
+won't be available in the system until you run the command below:
 
   $ sudo update-fonts-alias /usr/share/fonts/X11/misc
 
