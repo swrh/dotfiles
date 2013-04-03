@@ -1,4 +1,4 @@
-# .inputrc
+# dot.inputrc
 
 # Be 8 bit clean.
 set input-meta on
@@ -11,3 +11,5 @@ set keymap vi
 # Do not bell on tab-completion.
 set bell-style none
 set bell-style visible
+
+# vim:set ft=readline:
