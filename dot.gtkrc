@@ -1,0 +1,9 @@
+# dot.gtkrc
+
+style "user-font" {
+	fontset="-*-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"
+}
+
+widget_class "*" style "user-font"
+
+# vim:set ft=gtkrc:
