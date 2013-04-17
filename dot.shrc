@@ -48,14 +48,21 @@ fi
 # `vi' mode on.
 set -o vi
 
-# Cool and simple PS1.
+# Cool and "simple" PS1.
 PS1="\\h\\$ "
 case "${TERM}" in
 xterm*|rxvt*|screen*)
-	PS1="${PS1}\\[\\e]0;\\u@\\h: \\w"
-	tty="`tty 2>/dev/null`"
-	[ $? -ne 0 ] || PS1="${PS1} (${tty#/dev/})"
-	PS1="${PS1}\\a\\]"
+	_ps1="\\u@\\h: \\w"
+	_tty="`tty 2>/dev/null`"
+	[ $? -ne 0 ] || _ps1="${_ps1} (${_tty#/dev/})"
+	unset _tty
+	PS1="${PS1}\\[\\e]0;${_ps1}\\a\\]"
+	case "${TERM}" in
+	screen*)
+		PS1="${PS1}\\[\\ek${_ps1}\\e\\\\\\]"
+		;;
+	esac
+	unset _ps1
 	;;
 *)
 	;;
