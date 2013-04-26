@@ -183,6 +183,7 @@ style "Adobe*"          startsondesk 6
 style "OpenOffice.org*" startsondesk 6
 style "BrOffice.org*"   startsondesk 6
 style "*FreeMind*"      startsondesk 6
+style "LibreOffice*"    startsondesk 6
 
 # no desktop
 style "gkrellm"         sticky, notitle, circulateskip, staysontop
