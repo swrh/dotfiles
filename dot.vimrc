@@ -150,7 +150,7 @@ func GitGrep(...)
   exe s
   let &grepprg = save
 endfun
-command -nargs=? G call GitGrep(<f-args>)
+command -nargs=* -complete=file G call GitGrep(<f-args>)
 
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
