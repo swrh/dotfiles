@@ -20,11 +20,6 @@ usage()
 
 CMD="${0##*/}"
 
-PARSED=`getopt 'd:r:' "$@"`
-[ $? -eq 0 ] || usage
-
-eval set -- "$PARSED"
-
 DESTDIR=""
 REMOTEHOST=""
 
@@ -32,8 +27,7 @@ while [ $# -gt 0 ]; do
 	case "$1" in
 	-d) DESTDIR="$2"; shift 2 ;;
 	-r) REMOTEHOST="$2"; shift 2 ;;
-	--) shift 1; break ;;
-	*) usage "internal error at $LINENO" ;;
+	*) break ;;
 	esac
 done
 
@@ -55,7 +49,13 @@ fi
 
 cd "`dirname "$0"`"
 
-TMPDIR="`mktemp -d /tmp/$CMD.$$.XXXXXX`"
+if which mktemp > /dev/null; then
+	TMPDIR="`mktemp -d /tmp/$CMD.$$.XXXXXX`"
+else
+	TMPDIR="/tmp/$CMD.$$.XXXXXX"
+	mkdir "$TMPDIR"
+fi
+
 [ $? -eq 0 ] || err "could not create temporary directory"
 trap 'rm -fr "$TMPDIR"' 0
 
