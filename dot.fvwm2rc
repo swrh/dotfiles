@@ -158,7 +158,6 @@ style "pidgin"          startsondesk $[LASTPAGE]
 style "xchat"           startsondesk $[LASTPAGE]
 style "skype"           startsondesk $[LASTPAGE]
 style "beep-media-player" startsondesk $[LASTPAGE], notitle
-style "xmms"            startsondesk $[LASTPAGE], notitle
 # 20100808 - added new "empathy" style
 style "empathy"         startsondesk $[LASTPAGE]
 style "MPlayer"         notitle
@@ -427,7 +426,6 @@ addtomenu   menu-multimedia
 +   "wxvlc"         exec exec wxvlc
 +   "xine"          exec exec xine
 +   "xmcd"          exec exec xmcd
-+   "xmms"          exec exec xmms
 
 destroymenu menu-image
 addtomenu   menu-image
