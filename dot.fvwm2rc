@@ -368,10 +368,11 @@ key XF86AudioNext           a   n   exec exec xmms2 next
 key XF86AudioLowerVolume    a   n   exec exec amixer sset PCM 5%-
 key XF86AudioRaiseVolume    a   n   exec exec amixer sset PCM 5%+
 key XF86Mail                a   n   exec exec xterm -e mutt
-key XF86OfficeHome          a   n   exec exec google-chrome
+key XF86HomePage            a   n   exec exec google-chrome
 key XF86Calculator          a   n   exec exec xterm -e bc
 key XF86Stop                a   n   lock-x
 key XF86AudioMute           a   n   exec exec amixer sset Master toggle
+key XF86Messenger           a   n   exec exec skype
 
 destroymenu menu-root
 addtomenu   menu-root "fvwm2" title
