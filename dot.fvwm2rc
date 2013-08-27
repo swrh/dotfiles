@@ -374,6 +374,7 @@ key XF86Stop                a   n   lock-x
 key XF86AudioMute           a   n   exec exec amixer sset Master toggle
 key XF86Messenger           a   n   exec exec skype
 key XF86Launch5             a   n   exec exec xterm
+key XF86Tools               a   n   exec exec xterm -e alsamixer
 
 destroymenu menu-root
 addtomenu   menu-root "fvwm2" title
