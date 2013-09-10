@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+
+import re
+import os
+import sys
+import argparse
+import subprocess
+
+def humanize_bytes(nbytes):
+    if nbytes < 1024:
+        return '%u' % (nbytes)
+    elif nbytes < 1024 * 1024:
+        return '%.1fK' % (float(nbytes) / 1024)
+    elif nbytes < 1024 * 1024 * 1024:
+        return '%.1fM' % (float(nbytes) / 1024 / 1024)
+    return '%.1fG' % (float(nbytes) / 1024 / 1024 / 1024)
+
+def parse_args():
+    parser = argparse.ArgumentParser(add_help = False,
+            description = 'Calculate usage size of an SVN directories.')
+    parser.add_argument('--help', action = 'help',
+            help = 'show this help message and exit')
+    parser.add_argument('-h', '--human-readable', action = 'store_true',
+            help = 'print sizes in human readable format (e.g., 1K 234M 2G)')
+    parser.add_argument('svnurl',
+            help = 'the SVN url that should be used to calculate the size')
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+
+    if args.human_readable:
+        stringize_bytes = humanize_bytes
+    else:
+        stringize_bytes = str
+
+    p = None
+    if args.svnurl == '-':
+        inputfile = sys.stdin
+    else:
+        p = subprocess.Popen(( 'svn', 'ls', '-vR', args.svnurl, ),
+                close_fds = True, stdout = subprocess.PIPE)
+        inputfile = p.stdout
+
+    usage = {}
+
+    for line in inputfile:
+        line = line.splitlines()[0]
+        if line.endswith('/'):
+            continue
+        match = re.match('^\s*(\S+)\s+(\S+)\s+(\d+)\s+(\S+)\s+(\S+)\s+(\S+)\s(.+)$',
+                line)
+        if not match:
+            #print >> sys.stderr, '*** %s' % (line)
+            continue
+        size, filename = match.group(3, 7)
+        basedir = filename.split('/')[0]
+        usage[basedir] = usage.get(basedir, 0) + int(size)
+
+    for basedir in usage.keys():
+        print '%-7s %s' % (stringize_bytes(usage[basedir]), basedir)
+
+    if p != None:
+        p.wait()
+        if p.returncode != 0:
+            sys.exit(p.returncode)
+
+if __name__ == '__main__':
+    main()
+
+# vim:set et:
+# vi:set sw=4 ts=4:
