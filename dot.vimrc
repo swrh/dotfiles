@@ -113,6 +113,10 @@ iab _VERSION <c-r>=strftime("%Y%m%d")<cr>
 " ctrl-] fix
 map <c-\> <c-]>
 
+nnoremap <a-l> :buffers<cr>:buffer<space>
+nnoremap <a-n> :bn<cr>
+nnoremap <a-p> :bp<cr>
+
 map <f9> :prev<cr>z.
 map <f10> :next<cr>z.
 
