@@ -1,7 +1,6 @@
 # dot.profile
 #
-# Warning: this file is not read by bash(1) if ~/.bash_profile or ~/.bash_login
-# exists.
+# Warning: this file is not read by bash(1) if ~/.bash_login exists.
 
 # Configure default locale settings.
 if [ -z "${LANG}" ]; then
