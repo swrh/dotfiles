@@ -1,0 +1,3 @@
+#!/bin/sh
+
+eval exec `dmenu_path | dmenu -fn nexus -nb black -nf '#cccccc' -sb '#cccccc' -sf black`

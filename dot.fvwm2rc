@@ -257,7 +257,7 @@ key space   a   m   popup window-ops interior 0 0 nop
 # 20091109 - removed windowlist binding
 #key space   a   c   windowlist root c c
 key escape  a   c   popup menu-root root c c nop
-key f2      a   m   exec eval exec `dmenu_path | dmenu -fn nexus -nb black -nf '#cccccc' -sb '#cccccc' -sf black`
+key f2      a   m   exec eval exec x-command-prompt
 key f4      a   m   close
 key f7      a   m   move
 key f8      a   m   resize
