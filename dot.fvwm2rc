@@ -365,8 +365,8 @@ key XF86AudioPlay           a   n   exec exec xmms2 toggle
 key XF86AudioStop           a   n   exec exec xmms2 stop
 key XF86AudioPrev           a   n   exec exec xmms2 prev
 key XF86AudioNext           a   n   exec exec xmms2 next
-key XF86AudioLowerVolume    a   n   exec exec amixer sset PCM 5%-
-key XF86AudioRaiseVolume    a   n   exec exec amixer sset PCM 5%+
+key XF86AudioLowerVolume    a   n   exec exec amixer sset Master 5%-
+key XF86AudioRaiseVolume    a   n   exec exec amixer sset Master 5%+
 key XF86Mail                a   n   exec exec xterm -e mutt
 key XF86HomePage            a   n   exec exec google-chrome
 key XF86Calculator          a   n   exec exec xterm -e bc
