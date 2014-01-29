@@ -1,0 +1,3 @@
+gemhome: $HOME/gems
+gempath:
+- $HOME/gems
