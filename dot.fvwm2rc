@@ -127,7 +127,9 @@ style "default-style" edgemovedelay 250
 style "default-style" edgemoveresistance 20 20
 
 # 20100303 - disable opaque move - boring
-opaquemovesize 0
+# 20140202 - enable opaque move and resize - useful
+opaquemovesize 100
+style "default-style"   resizeopaque
 
 # 20090129 - newer fvwm 2.5 uses the syntax of the second line below
 #snapattraction 10 sametype screen
