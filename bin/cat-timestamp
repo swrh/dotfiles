@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec gawk '{ printf("%s\t%s\n", strftime(), $0); }' "$@"
