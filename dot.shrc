@@ -49,24 +49,28 @@ fi
 set -o vi
 
 # Cool and "simple" PS1.
-PS1="\\h\\$ "
-case "${TERM}" in
-xterm*|rxvt*|screen*)
-	_ps1="\\u@\\h: \\w"
-	_tty="`tty 2>/dev/null`"
-	[ $? -ne 0 ] || _ps1="${_ps1} (${_tty#/dev/})"
-	unset _tty
-	PS1="${PS1}\\[\\e]0;${_ps1}\\a\\]"
+if [ "$SHELL" = "/bin/sh" ]; then
+	PS1="$ "
+else
+	PS1="\\h\\$ "
 	case "${TERM}" in
-	screen*)
-		PS1="${PS1}\\[\\ek${_ps1}\\e\\\\\\]"
+	xterm*|rxvt*|screen*)
+		_ps1="\\u@\\h: \\w"
+		_tty="`tty 2>/dev/null`"
+		[ $? -ne 0 ] || _ps1="${_ps1} (${_tty#/dev/})"
+		unset _tty
+		PS1="${PS1}\\[\\e]0;${_ps1}\\a\\]"
+		case "${TERM}" in
+		screen*)
+			PS1="${PS1}\\[\\ek${_ps1}\\e\\\\\\]"
+			;;
+		esac
+		unset _ps1
+		;;
+	*)
 		;;
 	esac
-	unset _ps1
-	;;
-*)
-	;;
-esac
+fi
 
 # Debian only: recognize what `chroot' you're currently working in.
 if [ -z "${debian_chroot}" -a -r /etc/debian_chroot ]; then
