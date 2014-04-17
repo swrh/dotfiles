@@ -1,7 +1,7 @@
 # dot.bashrc
 
 # If not running interactively, don't do anything.
-[ ! -z "${PS1}" ] || return
+[ ! -z "${PS1}" -o "${-#*i}" != "${-}" ] || return 0
 
 # Don't put duplicate lines or lines beginning with an empty space in the
 # history.
