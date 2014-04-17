@@ -73,7 +73,7 @@ if [ ! -z "${BASH}" ]; then
 	esac
 else
 	# Nice and simple PS1.
-	PS1="`hostname`\\$ "
+	PS1="`hostname -s`\\$ "
 fi
 
 # Debian only: recognize what `chroot' you're currently working in.
