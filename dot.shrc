@@ -89,7 +89,11 @@ HISTSIZE=524288
 HISTFILESIZE=524288
 # Use a history file name different from the default to make sure that it will
 # only be used when HISTSIZE and HISTFILESIZE are set with 524288.
-HISTFILE="${HOME}/.sh_history"
+if [ ! -z "${KSH_VERSION}" ]; then
+	HISTFILE="${HOME}/.ksh_history"
+else
+	HISTFILE="${HOME}/.sh_history"
+fi
 
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
