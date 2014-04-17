@@ -28,6 +28,9 @@ fi
 alias l="ls -laF${_lsargs}"
 unset _lsargs
 
+# More aliases.
+alias scr="screen -D -RR -s -${SHELL}"
+
 # Set the favorite editor.
 if which vim > /dev/null 2>&1; then
 	EDITOR="vim"
