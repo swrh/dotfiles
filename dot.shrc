@@ -48,10 +48,10 @@ fi
 # `vi' mode on.
 set -o vi
 
-# Cool and "simple" PS1.
-if [ "$SHELL" = "/bin/sh" ]; then
-	PS1="$ "
-else
+# Set PS1.
+if [ ! -z "${BASH}" ]; then
+	# Use a fancy PS1 when using `bash' to update `xterm' and `screen'
+	# title bars.
 	PS1="\\h\\$ "
 	case "${TERM}" in
 	xterm*|rxvt*|screen*)
@@ -70,6 +70,9 @@ else
 	*)
 		;;
 	esac
+else
+	# Nice and simple PS1.
+	PS1="`hostname`\\$ "
 fi
 
 # Debian only: recognize what `chroot' you're currently working in.
