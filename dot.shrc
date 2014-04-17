@@ -12,9 +12,9 @@ unset command_not_found_handle
 unset PROMPT_COMMAND
 
 # Enable color support of `ls'.
-ls_args=""
+_lsargs=""
 if ls -dv / > /dev/null 2>&1; then
-	ls_args="${ls_args} -v"
+	_lsargs="${_lsargs} -v"
 fi
 if [ "${TERM}" != "dumb" ]; then
 	if which dircolors > /dev/null 2>&1; then
@@ -22,13 +22,11 @@ if [ "${TERM}" != "dumb" ]; then
 	fi
 
 	if ls -d --color=auto / > /dev/null 2>&1; then
-		ls_args="${ls_args} --color=auto"
+		_lsargs="${_lsargs} --color=auto"
 	fi
-
-	alias l="ls -laF${ls_args}"
-else
-	alias l="ls -laF${ls_args}"
 fi
+alias l="ls -laF${_lsargs}"
+unset _lsargs
 
 # Set the favorite editor.
 if which vim > /dev/null 2>&1; then
