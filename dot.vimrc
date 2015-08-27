@@ -147,6 +147,7 @@ if has("gui")
   set guifont=courier_new:h9
 endif
 
+" git grep function
 func GitGrep(...)
   let save = &grepprg
   set grepprg=git\ grep\ -n\ $*
