@@ -24,4 +24,10 @@
 [include]
 	path = .gitconfig-local
 
+[diff]
+	tool = vimdiff
+
+[merge]
+	tool = vimdiff
+
 # vim:set ft=gitconfig:
