@@ -51,6 +51,9 @@ set cpoptions=aABceFs
 " part, then have further <Tab>s cycle through the possibilities:
 set wildmode=list:longest,full
 
+" ignore some files
+set wildignore+=moc_*.cpp,*.o,*.so,*.exe,*.dll
+
 " set file searching path (^wf, gf)
 set path=.,./include,./../include,,include,../include,/usr/include,/usr/local/include
 
