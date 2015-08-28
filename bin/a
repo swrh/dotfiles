@@ -2,7 +2,7 @@
 
 usage()
 {
-    echo "usage: ${0##*/} [start]" 1>&2
+    echo "usage: ${0##*/} [start|volume] ARGS" 1>&2
     exit "$@"
 }
 
@@ -42,12 +42,30 @@ EOF
     esac
 }
 
+cmd_volume()
+{
+    [ $# -ge 1 ] || err "missing volume argument"
+
+    case "$1" in
+    up) adb shell input keyevent 24; exit $?  ;;
+    down) adb shell input keyevent 25; exit $?  ;;
+    -h)
+        echo "usage: ${0##*/} volume [up|down]"
+        exit 0
+        ;;
+    *)
+        err "$1: invalid argument"
+        ;;
+    esac
+}
+
 main()
 {
     [ $# -ge 1 ] || err "missing arguments"
 
     case "$1" in
     start) shift; cmd_start "$@" ;;
+    volume) shift; cmd_volume "$@" ;;
     -h) usage 0 2>&1 ;;
     *) warn "$1: invalid argument"; usage 1 ;;
     esac
