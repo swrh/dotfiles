@@ -2,7 +2,9 @@
 
 sleep 1
 xset dpms force standby
-if which gnome-screensaver-command > /dev/null; then
+if which i3lock > /dev/null; then
+	exec i3lock -c 000000
+elif which gnome-screensaver-command > /dev/null; then
 	exec gnome-screensaver-command --lock
 else
 	exec slock
