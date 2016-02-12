@@ -2,7 +2,7 @@
 
 usage()
 {
-    echo "usage: ${0##*/} [start|volume] ARGS" 1>&2
+    echo "usage: ${0##*/} [start|volume|coc] ARGS" 1>&2
     exit "$@"
 }
 
@@ -59,6 +59,22 @@ cmd_volume()
     esac
 }
 
+cmd_coc()
+{
+    [ $# -ge 1 ] || err "missing coc argument"
+
+    case "$1" in
+    attack) adb shell input touchscreen tap 20 600; exit $?  ;;
+    -h)
+        echo "usage: ${0##*/} coc [attack]"
+        exit 0
+        ;;
+    *)
+        err "$1: invalid argument"
+        ;;
+    esac
+}
+
 main()
 {
     [ $# -ge 1 ] || err "missing arguments"
@@ -66,6 +82,7 @@ main()
     case "$1" in
     start) shift; cmd_start "$@" ;;
     volume) shift; cmd_volume "$@" ;;
+    coc) shift; cmd_coc "$@" ;;
     -h) usage 0 2>&1 ;;
     *) warn "$1: invalid argument"; usage 1 ;;
     esac
