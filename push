@@ -66,6 +66,7 @@ PKGFILE="$TMPDIR/dotfiles.tar"
 
 tarcmd="c"
 for f in dot.*; do
+	[ -f "$f" ] || continue
 	g=".${f#dot.}"
 	cp -p "$f" "$WORKDIR/$g" || err "error copying dotfile"
 	tar -${tarcmd}f "$PKGFILE" -C "$WORKDIR" "$g" || err "error packaging dotfile"
