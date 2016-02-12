@@ -1,5 +1,4 @@
 xfonts-nexus
-fvwm
 git-core
 vim
 xterm
@@ -44,7 +43,6 @@ xsel
 electric-fence
 glibc-doc
 iputils-arping
-fvwm-icons
 socat
 xosview
 git-gui
