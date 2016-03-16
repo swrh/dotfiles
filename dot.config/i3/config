@@ -10,11 +10,13 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
+set $font nexus
+set $mixctrl Master
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 8
-font nexus
+font $font
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -70,6 +72,7 @@ bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
 bindsym $mod+ccedilla split h
+bindsym $mod+semicolon split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -162,9 +165,26 @@ bar {
 bindsym $mod+Delete exec --no-startup-id x-lock
 
 exec --no-startup-id xsetroot -solid \#000000
-exec --no-startup-id x-log-tail -fn nexus --color \#cccccc
+exec --no-startup-id x-log-tail -fn $font --color \#cccccc
+exec --no-startup-id nm-applet
 
 bindsym $mod+Prior focus output left
 bindsym $mod+Next focus output right
 bindsym $mod+Shift+Prior move window to output left
 bindsym $mod+Shift+Next move window to output right
+
+bindsym XF86AudioLowerVolume exec amixer sset $mixctrl 5%-
+bindsym XF86AudioRaiseVolume exec amixer sset $mixctrl 5%+
+bindsym XF86AudioMute exec amixer sset $mixctrl toggle
+
+bindsym XF86AudioPlay exec xmms2 toggle
+bindsym XF86AudioNext exec xmms2 next
+bindsym XF86AudioPrev exec xmms2 prev
+bindsym XF86AudioStop exec xmms2 stop
+
+bindsym XF86Mail exec xterm -e mutt
+bindsym XF86HomePage exec google-chrome
+bindsym XF86Calculator exec xterm -e bc
+bindsym XF86Messenger exec skype
+bindsym XF86Launch5 exec xterm
+bindsym XF86Tools exec xterm -e alsamixer
