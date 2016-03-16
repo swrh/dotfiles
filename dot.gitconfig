@@ -30,4 +30,7 @@
 [merge]
 	tool = vimdiff
 
+[push]
+	default = simple
+
 # vim:set ft=gitconfig:
