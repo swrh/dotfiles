@@ -1,11 +1,53 @@
 #!/bin/sh
 
+err()
+{
+	echo "${0##*/}: $*" 1>&2
+	exit 1
+}
+
+fork=1
+exec_prefix="exec"
+user_log=""
+
+while [ $# -ne 0 ]; do
+	case "$1" in
+	--no-fork)
+		fork=0
+		;;
+	--user-log|--user-log=*)
+		exec_prefix=""
+		user_log="${1#*=}"
+		if [ -z "$user_log" -o "$user_log" = "--user-log" ]; then
+			user_log="x-lock"
+		fi
+		;;
+	*)
+		err "invalid arguments"
+		;;
+	esac
+	shift
+done
+
+if [ ! -z "$user_log" ]; then
+	user-log "$user_log: screen locked"
+fi
+
 sleep 1
 xset dpms force standby
+
 if which i3lock > /dev/null; then
-	exec i3lock -c 000000
+	if [ $fork -eq 1 ]; then
+		$exec_prefix i3lock -c 000000
+	else
+		$exec_prefix i3lock -c 000000 -n
+	fi
 elif which gnome-screensaver-command > /dev/null; then
-	exec gnome-screensaver-command --lock
+	$exec_prefix gnome-screensaver-command --lock
 else
-	exec slock
+	$exec_prefix slock
+fi
+
+if [ ! -z "$user_log" ]; then
+	user-log "$user_log: screen unlocked"
 fi

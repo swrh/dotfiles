@@ -162,7 +162,7 @@ bar {
         tray_output primary
 }
 
-bindsym $mod+Delete exec --no-startup-id x-lock
+bindsym $mod+Delete exec --no-startup-id x-lock --no-fork --user-log=i3
 
 exec --no-startup-id xsetroot -solid \#000000
 exec --no-startup-id x-log-tail -fn $font --color \#cccccc
