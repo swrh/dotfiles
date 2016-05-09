@@ -32,7 +32,6 @@ PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 LESS="-R"; export LESS
 
 GEM_HOME="$HOME/gems"; export GEM_HOME
-GEM_PATH="$HOME/gems"; export GEM_PATH
-PATH="$HOME/gems/bin:$PATH"
+PATH="$GEM_HOME/bin:$PATH"
 
 # vim:set ft=sh:
