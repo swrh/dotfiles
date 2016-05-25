@@ -30,6 +30,7 @@ set autowrite           " save before commands like :next and :make
 set hlsearch            " switch on highlighting the last used search pattern
 set lazyredraw          " do not update screen while executing macros
 set modeline            " read vi set commands
+set mouse=a             " enable mouse control
 
 set showmatch           " briefly jump to matching brackets
 set showmode            " the mode we're in
