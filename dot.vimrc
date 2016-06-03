@@ -106,7 +106,6 @@ endif
 vnoremap p "_dP
 
 " list & listchars
-"set list listchars=eol:$,tab:»·,trail:·
 set list listchars=eol:$,tab:>.,trail:.
 
 set fileformats=unix,dos  " Vim's default on UNIX, also use it on DOS
