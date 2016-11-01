@@ -180,10 +180,5 @@ let g:ctrlp_custom_ignore = {
   \ 'link': 'some_bad_symbolic_links',
   \ }
 
-" jedi-vim plugin (https://github.com/davidhalter/jedi-vim):
-" git clone https://github.com/davidhalter/jedi-vim.git ~/.vim/bundle/jedi-vim
-set runtimepath^=~/.vim/bundle/jedi-vim
-let g:jedi#goto_assignments_command = "<leader>a"
-
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
