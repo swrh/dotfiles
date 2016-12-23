@@ -56,7 +56,7 @@ set wildmode=list:longest,full
 set wildignore+=moc_*.cpp,*.o,*.so,*.exe,*.dll
 
 " set file searching path (^wf, gf)
-set path=.,./include,./../include,,include,../include,/usr/include,/usr/local/include
+set path=.,include,../include,../../include,/usr/include,/usr/local/include
 
 " suffixes that get lower priority when doing tab completion for filenames
 " these are files we are not likely to want to edit or read
