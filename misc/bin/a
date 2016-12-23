@@ -2,7 +2,7 @@
 
 usage()
 {
-    echo "usage: ${0##*/} [start|volume|coc|screen] ARGS" 1>&2
+    echo "usage: ${0##*/} [start|volume|coc|screen|button] ARGS" 1>&2
     exit "$@"
 }
 
@@ -21,25 +21,30 @@ cmd_start()
 {
     [ $# -ge 1 ] || err "missing start argument (try \`-l' to list applications)"
 
+    local package=""
+
     case "$1" in
-    coc)
-        $PREFIX monkey -p com.supercell.clashofclans -c android.intent.category.LAUNCHER 1
-        exit $?
-        ;;
-    tunein)
-        $PREFIX monkey -p radiotime.player -c android.intent.category.LAUNCHER 1
-        ;;
+    coc) package=com.supercell.clashofclans ;;
+    cr) package=com.supercell.clashroyale ;;
+    settings) package=com.android.settings ;;
+    spotify) package=com.spotify.music ;;
+    tunein) package=radiotime.player ;;
+    whatsapp) package=com.whatsapp ;;
     -l)
         cat << EOF
 coc
+cr
+settings
+spotify
 tunein
+whatsapp
 EOF
         exit 0
         ;;
-    *)
-        err "$1: invalid application"
-        ;;
+    *) err "$1: invalid application" ;;
     esac
+
+    exec $PREFIX monkey -p $package -c android.intent.category.LAUNCHER 1
 }
 
 cmd_volume()
@@ -64,9 +69,12 @@ cmd_coc()
     [ $# -ge 1 ] || err "missing coc argument"
 
     case "$1" in
-    attack) adb shell input touchscreen tap 20 600; exit $?  ;;
+    attack) $PREFIX input touchscreen tap 20 600; sleep 1; $PREFIX input touchscreen tap 200 450; exit $?  ;;
+    chatopen) $PREFIX input touchscreen tap 5 300; exit $?  ;;
+    chatclose) $PREFIX input touchscreen tap 500 300; exit $?  ;;
+    next) $PREFIX input touchscreen tap 1200 500; exit $? ;;
     -h)
-        echo "usage: ${0##*/} coc [attack]"
+        echo "usage: ${0##*/} coc [attack|chatopen|chatclose|next]"
         exit 0
         ;;
     *)
@@ -97,6 +105,23 @@ cmd_screen()
     esac
 }
 
+cmd_button()
+{
+    [ $# -ge 1 ] || err "missing button argument"
+
+    case "$1" in
+    home) exec $PREFIX input keyevent 3; exit $? ;;
+    power) exec $PREFIX input keyevent 26; exit $? ;;
+    -h)
+        echo "usage: ${0##*/} button [home|power]"
+        exit 0
+        ;;
+    *)
+        err "$1: invalid argument"
+        ;;
+    esac
+}
+
 main()
 {
     [ $# -ge 1 ] || err "missing arguments"
@@ -112,6 +137,7 @@ main()
     volume) shift; cmd_volume "$@" ;;
     coc) shift; cmd_coc "$@" ;;
     screen) shift; cmd_screen "$@" ;;
+    button) shift; cmd_button "$@" ;;
     -h) usage 0 2>&1 ;;
     *) warn "$1: invalid argument"; usage 1 ;;
     esac
