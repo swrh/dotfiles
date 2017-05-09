@@ -33,4 +33,7 @@
 [push]
 	default = simple
 
+[alias]
+	lg = log --decorate --graph --oneline
+
 # vim:set ft=gitconfig:
