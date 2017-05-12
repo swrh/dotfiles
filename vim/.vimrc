@@ -163,9 +163,9 @@ command -nargs=+ -complete=file G call GitGrep(<f-args>)
 " search for the current word in git
 nmap <leader>g :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr>:silent G '\<<c-r>=expand('<cword>')<cr>\>'<cr>:redraw!<cr>:cc<cr>
 
-" search for the current word in C/C++ and Python source files
-nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr>:silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py<cr>
-nmap <leader>V :silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py<cr>
+" search for the current word in C/C++, Python and make files
+nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
+nmap <leader>V :silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py **/Makefile<cr>
 "
 " ctags ftw
 nmap <leader>t :!rm -f tags && find -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0 ctags -a<cr>
