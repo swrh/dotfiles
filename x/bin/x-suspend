@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Fork x-lock to log the lock/unlock times.
+x-lock --no-fork --user-log &
+sleep 10
+exec systemctl -i suspend
