@@ -24,6 +24,7 @@ xlock*planfont:                         nexus
 
 !! xterm
 xterm*background:                       #000000
+xterm*bellIsUrgent:                     true
 xterm*font:                             nexus
 xterm*boldFont:                         nexus
 xterm*font4:                            sabvga
