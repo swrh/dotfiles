@@ -1,6 +1,6 @@
 #!/bin/sh
 
-args="-fn nexus -nb black -nf #cccccc -sb #cccccc -sf black"
+args="-nb black -nf #cccccc -sb #cccccc -sf black $*"
 
 which dmenu_run > /dev/null && exec dmenu_run $args
 eval exec `dmenu_path | dmenu $args`
