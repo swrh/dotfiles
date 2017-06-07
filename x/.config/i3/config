@@ -127,7 +127,14 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exit
+#bindsym $mod+Shift+e exit
+set $mode_system Do you really want to exit i3? (y/n)
+bindsym $mod+Shift+e mode "$mode_system"
+mode "$mode_system" {
+    bindsym y exec --no-startup-id i3-msg exit, mode "default"
+    bindsym n mode "default"
+    bindsym Escape mode "default"
+}
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -188,3 +195,5 @@ bindsym XF86Calculator exec xterm -e bc
 bindsym XF86Messenger exec skype
 bindsym XF86Launch5 exec xterm
 bindsym XF86Tools exec xterm -e alsamixer
+
+# vim:set sw=4 ts=4 et:
