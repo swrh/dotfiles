@@ -1,57 +1,80 @@
 !! dot.Xresources
 
-!! general
-!*background:                            grey85
-!*foreground:                            grey0
-*font:                                  nexus
-*Font:                                  nexus
+!BLK Cursor
+#define _color0                         #000000
+#define _color8                         #545454
+!RED Tag
+#define _color1                         #a80000
+#define _color9                         #fc5454
+!GRN SpecialKey
+#define _color2                         #00a800
+#define _color10                        #54fc54
+!YEL Keyword
+#define _color3                         #a85400
+#define _color11                        #fcfc54
+!BLU Number
+#define _color4                         #0000a8
+#define _color12                        #5454fc
+!MAG Precondit
+#define _color5                         #a800a8
+#define _color13                        #fc54fc
+!CYN Float
+#define _color6                         #00a8a8
+#define _color14                        #54fcfc
+!WHT Search
+#define _color7                         #a8a8a8
+#define _color15                        #fcfcfc
+!FMT Include, StatusLine, ErrorMsg
+#define _colorBD                        #ffffff
+#define _colorUL                        #ccdc90
+#define _colorIT                        #80d4aa
+!TXT Normal, Normal, Cursor
+#define _foreground                     #cccccc
+#define _background                     #0f0f0f
+#define _cursorColor                    #8faf9f
 
-!! xosview
-xosview*font:                           nexus
-xosview*geometry:                       -0-0
-xosview*background:                     #000000
-xosview*foreground:                     #000000
+!! urxvt
+urxvt*urgentOnBell:                     true
+!urxvt*charClass:                        33:48,37:48,45-47:48,64:48
+!urxvt*cutToBeginningOfLine:             false
+urxvt*loginShell:                       true
+urxvt*saveLines:                        2048
+urxvt*scrollBar:                        false
+urxvt*scrollTtyOutput:                  false
+!urxvt.perl-ext:
+!urxvt.perl-ext-common:
+urxvt.iso14755:                         false
+urxvt.iso14755_52:                      false
 
-!! xlock
-xlock*background:                       black
-xlock*font:                             nexus
-xlock*foreground:                       white
-xlock*install:                          on
-xlock*logoutButton:                     -1
-xlock*mode:                             blank
-xlock*nice:                             20
-xlock*planfont:                         nexus
+urxvt*color0:                           _color0
+urxvt*color1:                           _color1
+urxvt*color2:                           _color2
+urxvt*color3:                           _color3
+urxvt*color4:                           _color4
+urxvt*color5:                           _color5
+urxvt*color6:                           _color6
+urxvt*color7:                           _color7
+urxvt*color8:                           _color8
+urxvt*color9:                           _color9
+urxvt*color10:                          _color10
+urxvt*color11:                          _color11
+urxvt*color12:                          _color12
+urxvt*color13:                          _color13
+urxvt*color14:                          _color14
+urxvt*color15:                          _color15
+urxvt*colorBD:                          _colorBD
+urxvt*colorIT:                          _colorIT
+urxvt*colorUL:                          _colorUL
+urxvt*foreground:                       _foreground
+urxvt*background:                       _background
+urxvt*cursorColor:                      _cursorColor
 
 !! xterm
-xterm*background:                       #000000
 xterm*bellIsUrgent:                     true
-xterm*font:                             nexus
-xterm*boldFont:                         nexus
-xterm*font4:                            sabvga
 !xterm*boldColors:                       true
 !xterm*boldMode:                         false
 xterm*charClass:                        33:48,37:48,45-47:48,64:48
-xterm*color0:                           #000000
-xterm*color1:                           #aa0000
-xterm*color2:                           #008800
-xterm*color3:                           #aa5522
-xterm*color4:                           #0000aa
-xterm*color5:                           #aa00aa
-xterm*color6:                           #00aaaa
-xterm*color7:                           #cccccc
-xterm*color8:                           #444444
-xterm*color9:                           #ff4444
-xterm*color10:                          #44ff44
-xterm*color11:                          #ffff44
-xterm*color12:                          #4444ff
-xterm*color13:                          #ff44ff
-xterm*color14:                          #44ffff
-xterm*color15:                          #ffffff
-xterm*colorBD:                          #ffffff
-xterm*colorUL:                          #ffffff
-!xterm*cursorColor:                      #ffff00
 xterm*cutToBeginningOfLine:             false
-xterm*foreground:                       #cccccc
 xterm*loginShell:                       true
 xterm*printAttributes:                  2
 xterm*saveLines:                        2048
@@ -60,13 +83,30 @@ xterm*scrollKey:                        true
 xterm*scrollTtyOutput:                  false
 xterm*zIconBeep:                        50
 
-Xft.dpi:                                96
+xterm*color0:                           _color0
+xterm*color1:                           _color1
+xterm*color2:                           _color2
+xterm*color3:                           _color3
+xterm*color4:                           _color4
+xterm*color5:                           _color5
+xterm*color6:                           _color6
+xterm*color7:                           _color7
+xterm*color8:                           _color8
+xterm*color9:                           _color9
+xterm*color10:                          _color10
+xterm*color11:                          _color11
+xterm*color12:                          _color12
+xterm*color13:                          _color13
+xterm*color14:                          _color14
+xterm*color15:                          _color15
+xterm*colorBD:                          _colorBD
+xterm*colorIT:                          _colorIT
+xterm*colorUL:                          _colorUL
+xterm*foreground:                       _foreground
+xterm*background:                       _background
+xterm*cursorColor:                      _cursorColor
 
-xclock*reverseVideo:                    true
-xclock*foreground:                      grey85
-xclock*analog:                          false
-xclock*font:                            nexus
-xclock*face:                            nexus
+Xft.dpi:                                96
 
 !! vim:set ft=xdefaults:
 !! vi:set et:
