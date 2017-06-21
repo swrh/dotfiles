@@ -10,7 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-set $font nexus
+set $font fixed
 set $mixctrl Master
 set $terminal x-terminal-emulator
 
