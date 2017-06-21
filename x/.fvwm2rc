@@ -8,7 +8,7 @@ imagepath /usr/share/pixmaps/fvwm
 ignoremodifiers l25
 desktopsize 1x1
 #defaultfont "xft:Verdana:Medium:Roman:size=8"
-defaultfont "nexus"
+defaultfont "fixed"
 xorvalue 208
 colormapfocus followsfocus
 
@@ -94,7 +94,7 @@ addtodecor default-decor
 + BorderStyle Inactive Solid black -- NoInset HiddenHandles
 
 #style "default-style"   font "xft:Verdana:Medium:Roman:size=8"
-style "default-style"   font "nexus"
+style "default-style"   font "fixed"
 style "default-style"   clicktofocus
 style "default-style"   grabfocus, grabfocustransient
 #style "default-style"   fpgrabfocus, \
@@ -210,7 +210,7 @@ menustyle "*"           popupoffset 0 100
 menustyle "*"           hilight3doff
 #menustyle "*"           automatichotkeys
 #menustyle "*"           font "xft:Verdana:Medium:Roman:size=8"
-menustyle "*"           font "nexus"
+menustyle "*"           font "fixed"
 # unselected text
 menustyle "*"           foreground #888888
 # box background
@@ -618,7 +618,7 @@ addtofunc   initfunction
 + "i" module FvwmPager 0 $[LASTPAGE]
 + "i" module FvwmIconMan
 + "i" module FvwmCommandS
-+ "i" exec exec x-log-tail -fn nexus --color '#cccccc'
++ "i" exec exec x-log-tail -fn fixed --color '#cccccc'
 + "i" exec exec xclock -d -geometry $[XCLOCKWIDTH]x$[PAGERHEIGHT]+$[STALONETRAYWIDTH]-0 -strftime '%Y%m%d %H:%M' -face sans-serif:size=8
 # 20100808 - moved stalonetray to FvwmButtons
 + "i" module FvwmButtons -g $[STALONETRAYWIDTH]x$[PAGERHEIGHT]+0-0
@@ -649,14 +649,14 @@ addtofunc   exitfunction
 *fvwmpagergeometry $[PAGERWIDTH]x$[PAGERHEIGHT]-0-0
 *fvwmpagerfont none
 #*fvwmpagersmallfont "xft:Verdana:Medium:Roman:size=6"
-*fvwmpagersmallfont "nexus"
+*fvwmpagersmallfont "fixed"
 *fvwmpagerfore #333333
 *fvwmpagerback #000000
 *fvwmpagerhilight #171717
 #*fvwmpagerdesktopscale 50
 *fvwmpagerballoons
 #*fvwmpagerballoonfont "xft:Verdana:Medium:Roman:size=8"
-*fvwmpagerballoonfont "nexus"
+*fvwmpagerballoonfont "fixed"
 *fvwmpagerballoonfore #bbbbbb
 
 *fvwmiconman: resolution                page
@@ -664,7 +664,7 @@ addtofunc   exitfunction
 *fvwmiconman: drawicons                 false
 *fvwmiconman: followfocus               true
 *fvwmiconman: sort                      none
-*fvwmiconman: font "nexus"
+*fvwmiconman: font "fixed"
 *fvwmiconman: iconbutton                flat white black
 *fvwmiconman: plainbutton               flat white grey10
 *fvwmiconman: focusbutton               flat white grey20
