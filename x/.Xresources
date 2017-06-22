@@ -40,7 +40,7 @@ urxvt*urgentOnBell:                     true
 urxvt*loginShell:                       true
 urxvt*saveLines:                        2048
 urxvt*scrollBar:                        false
-urxvt*scrollTtyKeypress:                false
+urxvt*scrollTtyKeypress:                true
 urxvt*scrollTtyOutput:                  false
 !urxvt.perl-ext:
 !urxvt.perl-ext-common:
