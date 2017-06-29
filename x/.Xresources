@@ -34,18 +34,18 @@
 #define _cursorColor                    #8faf9f
 
 !! urxvt
-urxvt*urgentOnBell:                     true
-!urxvt*charClass:                        33:48,37:48,45-47:48,64:48
-!urxvt*cutToBeginningOfLine:             false
+urxvt*cutchars:                         "()*,<>[]{}|'':$#="
+urxvt*fading:                           25
+urxvt*insecure:                         false
+urxvt*iso14755_52:                      false
+urxvt*iso14755:                         false
 urxvt*loginShell:                       true
 urxvt*saveLines:                        2048
 urxvt*scrollBar:                        false
 urxvt*scrollTtyKeypress:                true
 urxvt*scrollTtyOutput:                  false
-!urxvt.perl-ext:
-!urxvt.perl-ext-common:
-urxvt.iso14755:                         false
-urxvt.iso14755_52:                      false
+urxvt*tripleclickwords:                 false
+urxvt*urgentOnBell:                     true
 
 urxvt*color0:                           _color0
 urxvt*color1:                           _color1
