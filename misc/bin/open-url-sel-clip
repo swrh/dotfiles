@@ -1,0 +1,14 @@
+#!/bin/bash
+
+url="$(xsel)"
+
+if [ -z "$url" -o "$(wc -l <<< "$url")" -gt 1 ]; then
+	url="$(xclip -o)"
+
+	if [ -z "$url" -o "$(wc -l <<< "$url")" -gt 1 ]; then
+		echo "${0##*/}: invalid data on the selection buffer and/or clipboard" 1>&2
+		exit 1
+	fi
+fi
+
+exec xdg-open "$url"
