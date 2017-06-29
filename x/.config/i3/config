@@ -33,6 +33,9 @@ font $font
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# open an url which is in the selection or the clipboard buffer
+bindsym $mod+x exec open-url-sel-clip
+
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec $terminal
