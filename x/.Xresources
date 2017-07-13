@@ -1,4 +1,4 @@
-!! dot.Xresources
+!! .Xresources
 
 !BLK Cursor
 #define _color0                         #000000

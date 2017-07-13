@@ -1,4 +1,4 @@
-# dot.profile
+# .profile
 #
 # Warning: this file is not read by bash(1) if ~/.bash_login exists.
 
