@@ -28,6 +28,16 @@ fi
 alias l="ls -laF${_lsargs}"
 unset _lsargs
 
+# Enable color support of `grep'.
+_grepargs=""
+if [ "${TERM}" != "dumb" ]; then
+	if grep --color=auto -q . .shrc > /dev/null 2>&1; then
+		_grepargs="${_grepargs} --color=auto"
+	fi
+fi
+alias grep="grep ${_grepargs}"
+unset _grepargs
+
 # More aliases.
 alias scr="screen -D -RR -s -${SHELL}"
 
