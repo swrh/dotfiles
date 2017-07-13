@@ -1,4 +1,4 @@
-# dot.gtkrc
+# .gtkrc
 
 style "user-font" {
 	fontset="-*-lucida-medium-r-*-*-10-*-*-*-*-*-*-*"

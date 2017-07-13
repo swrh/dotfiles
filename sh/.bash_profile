@@ -1,4 +1,4 @@
-# dot.bash_profile
+# .bash_profile
 
 . "$HOME/.profile"
 

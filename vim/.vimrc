@@ -1,4 +1,4 @@
-" dot.vimrc
+" .vimrc
 "
 " configuration file for vim
 " written for Debian GNU/Linux by W.Akkerman <wakkerma@debian.org>

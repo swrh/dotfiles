@@ -1,4 +1,4 @@
-# dot.bashrc
+# .bashrc
 
 # If not running interactively, don't do anything.
 [ ! -z "${PS1}" -o "${-#*i}" != "${-}" ] || return 0
