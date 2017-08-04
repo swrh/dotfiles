@@ -34,7 +34,7 @@
 #define _cursorColor                    #8faf9f
 
 !! urxvt
-urxvt*cutchars:                         "()*,<>[]{}|'':$#="
+urxvt*cutchars:                         "()*,<>[]{}|'':$#=`"
 urxvt*fading:                           25
 urxvt*insecure:                         false
 urxvt*iso14755_52:                      false
