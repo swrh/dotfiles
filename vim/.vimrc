@@ -53,7 +53,7 @@ set cpoptions=aABceFs
 set wildmode=list:longest,full
 
 " ignore some files
-set wildignore+=moc_*.cpp,*.o,*.so,*.exe,*.dll
+set wildignore+=moc_*.cpp,*.o,*.so,*.exe,*.dll,*.class,*.pyc
 
 " set file searching path (^wf, gf)
 set path=.,include,../include,../../include,/usr/include,/usr/local/include
