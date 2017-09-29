@@ -27,6 +27,11 @@
 [merge]
 	tool = vimdiff
 
+[mergetool "meld"]
+	# Choose one of these 2 lines.
+	#cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+
 [push]
 	default = simple
 
