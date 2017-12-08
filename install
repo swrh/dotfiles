@@ -1,0 +1,6 @@
+#!/bin/sh -ex
+
+mkdir -p ../bin ../.config ../.config/i3 ../.config/i3status
+for d in git misc sh vim x; do
+	stow $d
+done
