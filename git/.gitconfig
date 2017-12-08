@@ -33,9 +33,10 @@
 	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
 
 [push]
-	default = simple
+#	default = simple
 
 [alias]
 	lg = log --decorate --graph --oneline
+	cl = clean -fdx -e .svn
 
 # vim:set ft=gitconfig:
