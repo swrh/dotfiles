@@ -168,7 +168,7 @@ nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
 nmap <leader>V :silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py **/Makefile **/*.java **/*.xml **/*.txt<cr>
 "
 " ctags ftw
-nmap <leader>t :!rm -f tags && find -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0 ctags -a<cr>
+nmap <leader>t :!rm -f tags && find -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0r ctags -a<cr>
 
 " persistent undo
 set undofile
