@@ -171,11 +171,19 @@ nmap <leader>V :silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py **/Makefil
 nmap <leader>t :!rm -f tags && find -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0r ctags -a<cr>
 
 " persistent undo
-set undofile
-set undodir=~/.vim/undo
+if version >= 703
+  if !isdirectory($HOME.'/.vim')
+    call mkdir($HOME.'/.vim', '', 0770)
+  endif
+  if !isdirectory($HOME.'/.vim/undo')
+    call mkdir($HOME.'/.vim/undo', '', 0700)
+  endif
+  set undofile
+  set undodir=~/.vim/undo
+  set undoreload=10000
+endif
 
 set undolevels=1000
-set undoreload=10000
 
 " CtrlP plugin (https://github.com/ctrlpvim/ctrlp.vim):
 " git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
