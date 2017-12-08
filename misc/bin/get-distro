@@ -23,9 +23,35 @@ get_debian_name()
 	return 1
 }
 
+get_ubuntu_name()
+{
+	local ver="`. /etc/lsb-release && echo $DISTRIB_RELEASE`"
+	if [ $? -ne 0 ]; then
+		echo "unknown"
+		return 1
+	fi
+
+	case "$ver" in
+	14.04)
+		echo "trusty"
+		return 0
+		;;
+	16.04)
+		echo "xenial"
+		return 0
+		;;
+	esac
+
+	echo "unknown"
+	exit 1
+}
+
 get_distro()
 {
-	if [ -f /etc/debian_version ]; then
+	if [ -f /etc/lsb-release ]; then
+		get_ubuntu_name
+		return 0
+	elif [ -f /etc/debian_version ]; then
 		get_debian_name
 		return 0
 	fi
