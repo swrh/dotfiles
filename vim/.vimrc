@@ -165,8 +165,8 @@ nmap <leader>g :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr>:silent G '\<<c-r>
 
 " search for the current word in C/C++, Python and make files
 nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
-nmap <leader>V :silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py **/Makefile **/*.java **/*.xml **/*.txt<cr>
-"
+nmap <leader>V :silent vimgrep /<c-r>// **/*.[ch] **/*.[ch]pp **/*.py **/Makefile **/*.java **/*.xml **/*.txt **/*.cmake<cr>
+
 " ctags ftw
 nmap <leader>t :!rm -f tags && find -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0r ctags -a<cr>
 
@@ -194,6 +194,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+"let g:is_bash = 1
 
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
