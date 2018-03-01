@@ -31,4 +31,9 @@ PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
 
 LESS="-R"; export LESS
 
+mkcd()
+{
+	mkdir -p "$@" && cd "$@"
+}
+
 # vim:set ft=sh:
