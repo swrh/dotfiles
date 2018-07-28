@@ -123,8 +123,6 @@ nnoremap <a-p> :bp<cr>
 map <f9> :prev<cr>z.
 map <f10> :next<cr>z.
 
-map <f12> :vimgrep /<c-r>// **/*.[ch]*<cr>
-
 " previous and next compiler error (quickfix)
 map <c-p> :cprev<cr>z.:cc<cr>
 map <c-n> :cnext<cr>z.:cc<cr>
