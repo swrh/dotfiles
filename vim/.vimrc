@@ -92,8 +92,10 @@ if has("autocmd")
   " formatting, reset comments to default, no indenting
   autocmd FileType mail setlocal tw=72 comments& nocindent
 
-  " HTML files
-  autocmd FileType html,css setlocal sw=2
+  " Web files
+  autocmd FileType html,css setlocal sw=2 et
+  autocmd FileType javascript setlocal sw=2 et
+  autocmd FileType ruby,eruby setlocal sw=2 et
 
   " this means vim will always jump to the last edited line in a file if
   " possible
