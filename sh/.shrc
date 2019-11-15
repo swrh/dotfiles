@@ -109,6 +109,12 @@ else
 	HISTFILE="${HOME}/.sh_history"
 fi
 
+# https://github.com/rbenv/rbenv
+if [ -d "$HOME/.rbenv/bin" ]; then
+	PATH="$HOME/.rbenv/bin:$PATH"
+	eval "$(rbenv init -)"
+fi
+
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
 
