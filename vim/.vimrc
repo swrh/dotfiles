@@ -161,7 +161,8 @@ endfun
 command -nargs=+ -complete=file G call GitGrep(<f-args>)
 
 " search for the current word in git
-nmap <leader>g :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr>:silent G '\<<c-r>=expand('<cword>')<cr>\>'<cr>:redraw!<cr>:cc<cr>
+nmap <leader>g :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>G
+nmap <leader>G :silent G '<c-r>/'<cr>:redraw!<cr>:cc<cr>z.
 
 " search for the current word in C/C++, Python and make files
 nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
