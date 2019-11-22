@@ -166,7 +166,7 @@ nmap <leader>G :silent G '<c-r>/'<cr>:redraw!<cr>:cc<cr>z.
 
 " search for the current word in C/C++, Python and make files
 nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
-nmap <leader>V :silent vimgrep /<c-r>// **/*.[CcHh] **/*.[ch]pp **/*.cc **/*.py **/Makefile **/*.java **/*.xml **/*.txt **/*.cmake **/*.proto *.sh<cr>
+nmap <leader>V :silent vimgrep /<c-r>// **/*.[CcHh] **/*.[ch]pp **/*.cc **/*.py **/Makefile **/*.java **/*.xml **/*.txt **/*.cmake **/*.proto *.sh<cr>z.
 
 " ctags ftw
 nmap <leader>tf :!rm -f tags && find . -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0r ctags -a<cr>
