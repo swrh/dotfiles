@@ -42,4 +42,7 @@
 [credential]
 	helper = cache
 
+[svn]
+	pushmergeinfo = true
+
 # vim:set ft=gitconfig:
