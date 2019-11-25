@@ -9,3 +9,7 @@ if [[ -d "$HOME/.rbenv/bin" ]]; then
 
 	eval "$(rbenv init -)"
 fi
+
+if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
+	. "$HOME/.iterm2_shell_integration.zsh"
+fi
