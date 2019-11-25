@@ -1,4 +1,7 @@
 .*.swp
+.clangd
 .svn
-tags
+__pycache__
 Session.vim
+compile_commands.json
+tags
