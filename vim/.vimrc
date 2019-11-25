@@ -122,6 +122,7 @@ nnoremap <a-l> :buffers<cr>:buffer<space>
 nnoremap <a-n> :bn<cr>
 nnoremap <a-p> :bp<cr>
 
+" previous and next opened file
 map <f9> :prev<cr>z.
 map <f10> :next<cr>z.
 
