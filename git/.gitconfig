@@ -39,4 +39,7 @@
 	lg = log --decorate --graph --oneline
 	cl = clean -fdx -e .svn
 
+[credential]
+	helper = cache
+
 # vim:set ft=gitconfig:
