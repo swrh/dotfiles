@@ -53,5 +53,7 @@ if version >= 703
 endif
 set undolevels=1000
 
+autocmd FileType yaml setlocal sw=2 et
+
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
