@@ -55,5 +55,8 @@ set undolevels=1000
 
 autocmd FileType yaml setlocal sw=2 et
 
+call plug#begin()
+call plug#end()
+
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
