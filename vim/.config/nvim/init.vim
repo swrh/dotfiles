@@ -39,5 +39,19 @@ nmap <leader>V :silent vimgrep /<c-r>// **/*.[CcHh] **/*.[ch]pp **/*.cc **/*.py 
 nmap <leader>tf :!rm -f tags && find . -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0r ctags -a<cr>
 nmap <leader>tg :!rm -f tags && git ls-files -z \| xargs -0r ctags -a<cr>
 
+" persistent undo
+if version >= 703
+  if !isdirectory($HOME.'/.vim')
+    call mkdir($HOME.'/.vim', '', 0770)
+  endif
+  if !isdirectory($HOME.'/.vim/undo')
+    call mkdir($HOME.'/.vim/undo', '', 0700)
+  endif
+  set undofile
+  set undodir=~/.vim/undo
+  set undoreload=10000
+endif
+set undolevels=1000
+
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
