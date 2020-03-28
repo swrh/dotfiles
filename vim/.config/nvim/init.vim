@@ -1,7 +1,11 @@
 " .config/nvim/init.vim
 
 " save before commands like :next and :make
-set autowrite
+set autowrite           " save before commands like :next and :make
+set hlsearch            " switch on highlighting the last used search pattern
+set mouse=a             " enable mouse control
+
+set path=.,./include,../include,../../include,/usr/include,/usr/local/include
 
 " list & listchars
 set list listchars=eol:$,tab:>.,trail:.
