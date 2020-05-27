@@ -59,10 +59,10 @@ if version >= 703
 endif
 set undolevels=1000
 
+autocmd FileType html setlocal sw=2 et
 autocmd FileType yaml setlocal sw=2 et
-
-call plug#begin()
-call plug#end()
+autocmd FileType javascript setlocal sw=2 et
+autocmd FileType cpp setlocal sw=4 ts=4 et tw=120
 
 " vim:set ft=vim:
 " vi:set et sw=2 tw=78:
