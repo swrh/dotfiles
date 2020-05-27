@@ -5,6 +5,8 @@ set autowrite           " save before commands like :next and :make
 set hlsearch            " switch on highlighting the last used search pattern
 set mouse=a             " enable mouse control
 
+let g:load_doxygen_syntax=1
+
 set path=.,./include,../include,../../include,/usr/include,/usr/local/include
 
 " list & listchars
