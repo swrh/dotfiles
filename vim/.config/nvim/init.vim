@@ -61,7 +61,9 @@ set undolevels=1000
 
 autocmd FileType html setlocal sw=2 et
 autocmd FileType yaml setlocal sw=2 et
+autocmd FileType json setlocal sw=2 et
 autocmd FileType javascript setlocal sw=2 et
+autocmd FileType typescript setlocal sw=2 et
 autocmd FileType cpp setlocal sw=4 ts=4 et tw=120
 
 " vim:set ft=vim:
