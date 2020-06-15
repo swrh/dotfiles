@@ -37,8 +37,7 @@ floating_modifier $mod
 bindsym $mod+x exec open-url-sel-clip
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec $terminal
+bindsym $mod+Return exec --no-startup-id $terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -185,11 +184,11 @@ bindsym XF86AudioNext exec xmms2 next
 bindsym XF86AudioPrev exec xmms2 prev
 bindsym XF86AudioStop exec xmms2 stop
 
-bindsym XF86Mail exec $terminal -e mutt
+bindsym XF86Mail exec --no-startup-id $terminal -e mutt
 bindsym XF86HomePage exec google-chrome
-bindsym XF86Calculator exec $terminal -e bc
+bindsym XF86Calculator exec --no-startup-id $terminal -e bc
 bindsym XF86Messenger exec skype
-bindsym XF86Launch5 exec $terminal
-bindsym XF86Tools exec $terminal -e alsamixer
+bindsym XF86Launch5 exec --no-startup-id $terminal
+bindsym XF86Tools exec --no-startup-id $terminal -e alsamixer
 
 # vim:set sw=4 ts=4 et:
