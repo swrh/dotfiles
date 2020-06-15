@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+
+import subprocess
+import sys
+
+def err(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+    sys.exit(1)
+
+def main():
+    if len(sys.argv) != 2:
+        err('bright: wrong number of arguments')
+
+    arg = sys.argv[1]
+    if arg == 'up':
+        step = +1
+    elif arg == 'down':
+        step = -1
+    else:
+        err('bright: argument must be "up" or "down"')
+
+    # get the data on screens and current brightness, parsed from xrandr --verbose
+    current = [l.split() for l in subprocess.check_output(['xrandr', '--verbose']).decode('utf-8').splitlines()]
+    # find the name(s) of the screen(s)
+    screens = [l[l.index('connected')-1] for l in current if 'connected' in l]
+    # find the current brightness
+    currset = (round(float([l for l in current if 'Brightness:' in l][0][1]) * 10)) / 10
+    # create a range of brightness settings (0.1 to 1.0)
+    sets = [n / 10 for n in list(range(11))][1:]
+    # get the current brightness -value
+    value = len([n for n in sets if currset >= n])
+
+    # calculte the first value higher than the current brightness (rounded on 0.1)
+    nextbright = min(10, max(0, value + step)) / 10
+    for scr in screens:
+        # set the new brightness
+        subprocess.Popen(['xrandr', '--output', scr, '--brightness', str(nextbright)])
+
+if __name__ == '__main__':
+    main()

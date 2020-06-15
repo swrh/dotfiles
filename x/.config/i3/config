@@ -170,6 +170,9 @@ exec --no-startup-id xsetroot -solid \#000000
 exec --no-startup-id x-log-tail -fn $font --color \#cccccc
 exec --no-startup-id nm-applet
 
+exec --no-startup-id xrdb -merge ~/.Xresources
+exec --no-startup-id xinput set-prop 'bcm5974' 'libinput Tapping Enabled' 1
+
 bindsym $mod+Prior focus output left
 bindsym $mod+Next focus output right
 bindsym $mod+Shift+Prior move window to output left
@@ -178,6 +181,9 @@ bindsym $mod+Shift+Next move window to output right
 bindsym XF86AudioLowerVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
 bindsym XF86AudioRaiseVolume  exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
 bindsym XF86AudioMute         exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+
+bindsym XF86MonBrightnessUp   exec --no-startup-id x-bright up
+bindsym XF86MonBrightnessDown exec --no-startup-id x-bright down
 
 bindsym XF86AudioPlay exec xmms2 toggle
 bindsym XF86AudioNext exec xmms2 next
