@@ -172,6 +172,9 @@ exec --no-startup-id nm-applet
 
 exec --no-startup-id xrdb -merge ~/.Xresources
 exec --no-startup-id xinput set-prop 'bcm5974' 'libinput Tapping Enabled' 1
+# Remap XF86LaunchA (keycode 128) to Insert so we can paste using
+# Shift+XF86LaunchA on my MacBook Air.
+exec --no-startup-id xmodmap -e 'keycode 128 = Insert'
 
 bindsym $mod+Prior focus output left
 bindsym $mod+Next focus output right
