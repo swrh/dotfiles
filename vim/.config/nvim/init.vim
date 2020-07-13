@@ -5,9 +5,22 @@ set autowrite           " save before commands like :next and :make
 set hlsearch            " switch on highlighting the last used search pattern
 set mouse=a             " enable mouse control
 
+set cinoptions=:0,l1,g0,t0
 let g:load_doxygen_syntax=1
 
+" ignore some files
+set wildignore+=moc_*.cpp,*.o,*.so,*.exe,*.dll,*.class,*.pyc
+
+" set file searching path (^wf, gf)
 set path=.,./include,../include,../../include,/usr/include,/usr/local/include
+
+" suffixes that get lower priority when doing tab completion for filenames
+" these are files we are not likely to want to edit or read
+set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc
+
+if &term =~ "xterm"
+  set title             " let the title stuff work
+endif
 
 " list & listchars
 set list listchars=eol:$,tab:>.,trail:.
