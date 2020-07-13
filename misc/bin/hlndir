@@ -1,0 +1,61 @@
+#!/bin/bash -e
+
+err()
+{
+	echo "${0##*/}: $*" 1>&2
+	exit 1
+}
+
+hlndir()
+{
+	[[ $# -eq 2 ]] || err "invalid number of arguments"
+	local origdir="$1"; shift
+	local destdir="$1"; shift
+	local files=()
+	if [[ ! -d "$destdir" ]]; then
+		mkdir -pv "$destdir" || exit 1
+		local stat="$(stat -c '%#a' "$origdir")"
+		[[ $? -eq 0 ]] || exit 1
+		chmod -c "$stat" "$destdir" || exit 1
+	fi
+	for f in "$origdir"/*; do
+		if [[ -d "$f" ]]; then
+			hlndir "$f" "$destdir/${f##*/}" || err "unknown error"
+			continue
+		fi
+		if [[ ${#files[@]} -ge 1000 ]]; then
+			"${lncmd[@]}" "${files[@]}" "$destdir/" || exit 1
+			files=()
+		fi
+		[[ "$f" -ef "$destdir/${f##*/}" ]] || files+=("$f")
+	done
+	if [[ ${#files[@]} -ge 1 ]]; then
+		"${lncmd[@]}" "${files[@]}" "$destdir/" || exit 1
+	fi
+}
+
+main()
+{
+	local cmdprefix=()
+	while [[ $# -gt 0 ]]; do
+		case "$1" in
+		-h|--help)
+			echo "usage: hlndir [-h|--help] [--sudo] SOURCE DESTINATION"
+			exit 0
+			;;
+		--sudo)
+			cmdprefix=("sudo")
+			;;
+		*)
+			break
+			;;
+		esac
+		shift
+	done
+	local lncmd=("${cmdprefix[@]}" ln -fv)
+	shopt -s nullglob
+	shopt -s dotglob
+	hlndir "$@"
+}
+
+main "$@"
