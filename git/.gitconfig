@@ -44,5 +44,6 @@
 
 [svn]
 	pushmergeinfo = true
+	rmdir = true
 
 # vim:set ft=gitconfig:
