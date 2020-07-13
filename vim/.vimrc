@@ -19,7 +19,7 @@ set textwidth=0         " don't wrap words by default
 set nobackup            " don't keep a backup file
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more than
                         " 50 lines of registers
-set history=1024        " keep 1024 lines of command line history
+set history=10000       " keep 10000 lines of command line history
 set ruler               " show the cursor position all the time
 set visualbell          " enable visualbell
 set showcmd             " show (partial) command in status line
@@ -45,7 +45,7 @@ set formatoptions=croqln2   " auto-wrap with textwidth, auto-insert comment
 
 set cinoptions=:0,l1,g0,t0
 let g:load_doxygen_syntax=1
-set cpoptions=aABceFs
+set cpoptions=aABceFs_
 
 " have command-line completion <Tab> (for filenames, help topics, option
 " names) first list the available options and complete the longest common
