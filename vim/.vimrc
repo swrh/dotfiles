@@ -45,7 +45,7 @@ set formatoptions=croqln2   " auto-wrap with textwidth, auto-insert comment
 
 set cinoptions=:0,l1,g0,t0
 let g:load_doxygen_syntax=1
-set cpoptions=aABceFs_
+set cpoptions=aABceFs
 
 " have command-line completion <Tab> (for filenames, help topics, option
 " names) first list the available options and complete the longest common
