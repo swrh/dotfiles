@@ -11,8 +11,7 @@
 
 set $mod Mod4
 set $font fixed
-set $mixctrl Master
-set $terminal x-terminal-emulator
+set $terminal uxterm
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -37,13 +36,13 @@ floating_modifier $mod
 bindsym $mod+x exec open-url-sel-clip
 
 # start a terminal
-bindsym $mod+Return exec --no-startup-id $terminal
+bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec --no-startup-id x-command-prompt -fn $font
+bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -166,6 +165,7 @@ bar {
 
 bindsym $mod+Delete exec --no-startup-id x-lock --no-fork --user-log=i3
 
+exec --no-startup-id xss-lock -- x-lock --no-fork --user-log=i3
 exec --no-startup-id xsetroot -solid \#000000
 exec --no-startup-id x-log-tail -fn $font --color \#cccccc
 exec --no-startup-id nm-applet
@@ -193,11 +193,10 @@ bindsym XF86AudioNext exec xmms2 next
 bindsym XF86AudioPrev exec xmms2 prev
 bindsym XF86AudioStop exec xmms2 stop
 
-bindsym XF86Mail exec --no-startup-id $terminal -e mutt
+bindsym XF86Mail exec --no-startup-id i3-sensible-terminal -e mutt
 bindsym XF86HomePage exec google-chrome
-bindsym XF86Calculator exec --no-startup-id $terminal -e bc
-bindsym XF86Messenger exec skype
-bindsym XF86Launch5 exec --no-startup-id $terminal
-bindsym XF86Tools exec --no-startup-id $terminal -e alsamixer
+bindsym XF86Calculator exec --no-startup-id i3-sensible-terminal -e bc
+bindsym XF86Launch5 exec --no-startup-id i3-sensible-terminal
+bindsym XF86Tools exec --no-startup-id i3-sensible-terminal -e alsamixer
 
 # vim:set sw=4 ts=4 et:

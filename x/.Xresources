@@ -85,6 +85,9 @@ xterm*scrollKey:                        true
 xterm*scrollTtyOutput:                  false
 xterm*zIconBeep:                        50
 
+xterm*faceName: Hack Nerd Font Mono
+xterm*faceSize: 9
+
 xterm*color0:                           _color0
 xterm*color1:                           _color1
 xterm*color2:                           _color2

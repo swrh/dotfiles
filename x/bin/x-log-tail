@@ -8,10 +8,11 @@ declare -i i n scr nscreens nlogfiles
 
 # load log files list
 i=0
-for f in /var/log/{messages,syslog,kern.log,daemon.log,auth.log}; do
+for f in /var/log/syslog; do
 	[ -r "${f}" ] || continue
 	LOGFILE[$((i++))]="${f}"
 done
+[[ ${#LOGFILE[@]} -gt 0 ]] || exit 1
 
 # load screens list
 if ! xinerama-info > /dev/null 2>&1; then
