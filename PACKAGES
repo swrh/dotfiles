@@ -1,11 +1,9 @@
-xfonts-nexus
-git-core
+git
 vim
 xterm
 root-tail
-slock
-dmenu
-ctags
+suckless-tools
+universal-ctags
 sudo
 subversion
 cvs
@@ -38,7 +36,6 @@ valgrind
 mencoder
 mplayer
 unaccent
-gitk
 xsel
 electric-fence
 glibc-doc
@@ -47,8 +44,12 @@ socat
 xosview
 git-gui
 rcs
-mr
+myrepos
 cmake
 stow
 rxvt-unicode
 meld
+bat
+fzf
+ripgrep
+xclip
