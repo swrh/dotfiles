@@ -120,6 +120,14 @@ fi
 
 alias cd-nvim='cd ~/.config/nvim'
 
+alias ga='git add'
+alias gc='git commit'
+alias gd='git diff'
+alias gg='git grep'
+alias gl='git log'
+alias glg='git lg'
+alias gs='git status'
+
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
 
