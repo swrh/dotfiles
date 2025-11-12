@@ -128,6 +128,8 @@ alias gl='git log'
 alias glg='git lg'
 alias gs='git status'
 
+alias bat='batcat'
+
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
 
