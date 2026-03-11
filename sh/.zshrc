@@ -15,6 +15,15 @@ if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
 	. "$HOME/.iterm2_shell_integration.zsh"
 fi
 
+if which fzf >/dev/null; then
+	fzf-history-widget() {
+		BUFFER=$(fc -l -n -r 1 | awk '!seen[$0]++' | fzf --no-sort)
+		CURSOR=$#BUFFER
+	}
+	zle     -N    fzf-history-widget
+	bindkey '^R'  fzf-history-widget
+fi
+
 activate_android()
 {
 	local android_home="$HOME/Library/Android/sdk"
