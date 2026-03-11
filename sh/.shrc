@@ -129,6 +129,9 @@ alias glg='git lg'
 alias gs='git status'
 
 alias bat='batcat'
+if which fdfind >/dev/null; then
+	alias fd='fdfind'
+fi
 
 # Load local shell resources.
 [ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
