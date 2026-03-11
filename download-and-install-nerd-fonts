@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -e
+set -ex
 
-declare -a fonts=(
+fonts=(
   BitstreamVeraSansMono
   CascadiaCode
   CodeNewRoman
@@ -24,8 +24,9 @@ declare -a fonts=(
   UbuntuMono
 )
 
-version=$(curl -s https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest | jq -r .name)
-if [ -z "$version" ] || [ "$version" = "null" ]; then
+latest_json=$(curl -fsS https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest)
+version=$(jq -r .name <<<"$latest_json")
+if [[ -z "$version" || "$version" == "null" ]]; then
   version="v3.2.1"
 fi
 echo "latest version: $version"
@@ -39,13 +40,22 @@ fi
 
 for font in "${fonts[@]}"; do
   zip_file="${font}.zip"
-  download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
-  echo "Downloading $download_url"
-  wget "$download_url"
+  if [[ ! -f "$zip_file" ]]; then
+    download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
+    echo "Downloading $download_url"
+    wget "$download_url" -O "$zip_file~"
+    mv "$zip_file~" "$zip_file"
+  fi
   unzip -o "$zip_file" -d "$fonts_dir"
-  rm "$zip_file"
 done
 
 find "$fonts_dir" -name 'Windows Compatible' -delete
 
 fc-cache -fv
+
+for font in "${fonts[@]}"; do
+  zip_file="${font}.zip"
+  rm -f "$zip_file"
+done
+
+# vim:set sw=2 ts=2 et:
