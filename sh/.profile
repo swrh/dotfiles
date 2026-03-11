@@ -28,6 +28,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
+PATH="$PATH:$HOME/.local/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
 LESS="-R"; export LESS
 
