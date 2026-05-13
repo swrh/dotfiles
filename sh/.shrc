@@ -56,7 +56,7 @@ set -o vi
 if [ -n "$BASH_VERSION" ]; then
 	# Use a fancy PS1 when using `bash' to update `xterm' and `screen'
 	# title bars.
-	PS1="\\h\\$ "
+	PS1='\h\$ '
 	case "${TERM}" in
 	xterm*|rxvt*|screen*)
 		_ps1="\\u@\\h: \\w"
@@ -75,10 +75,10 @@ if [ -n "$BASH_VERSION" ]; then
 		;;
 	esac
 elif [ -n "$ZSH_VERSION" ]; then
-	PS1="`hostname -s`\$ "
+	PS1='%m%# '
 else
 	# Nice and simple PS1.
-	PS1="`hostname -s`\\$ "
+	PS1="`hostname -s`\\\$ "
 fi
 
 # Debian only: recognize what `chroot' you're currently working in.
