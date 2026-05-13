@@ -10,6 +10,9 @@ if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
 	. "$HOME/.iterm2_shell_integration.zsh"
 fi
 
+autoload -Uz compinit
+compinit
+
 if which tv >/dev/null; then
 	eval "$(tv init zsh)"
 fi
