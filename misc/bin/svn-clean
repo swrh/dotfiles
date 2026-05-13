@@ -1,3 +1,0 @@
-#!/bin/sh
-
-svn status --no-ignore | grep ^[?I] | cut -c9- | tr \\n \\0 | xargs -0 rm -fr "$@"
