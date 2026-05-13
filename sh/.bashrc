@@ -24,6 +24,14 @@ shopt -s checkwinsize
 # Disable stupid bash completion.
 complete -r
 
+if which tv >/dev/null; then
+	eval "$(tv init bash)"
+fi
+
+if which starship >/dev/null; then
+	eval "$(starship init bash)"
+fi
+
 # Load local bash shell resources.
 [ ! -f "${HOME}/.bashrc-local" ] || . "${HOME}/.bashrc-local"
 
