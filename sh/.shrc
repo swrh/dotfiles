@@ -126,6 +126,11 @@ alias gs='git status'
 
 alias c='chezmoi'
 alias cg='chezmoi git --'
+alias cgc='chezmoi git commit --'
+alias cgd='chezmoi git diff --'
+alias cgg='chezmoi git grep --'
+alias cgl='chezmoi git lg --'
+alias cgs='chezmoi git status --'
 
 if which fdfind >/dev/null; then
 	alias fd='fdfind'
