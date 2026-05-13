@@ -1,12 +1,7 @@
 # .zshrc
 
-if [[ -f "$HOME/.shrc" ]]; then
-	. "$HOME/.shrc"
-fi
-
-if [[ -f "$HOME/.profile" ]]; then
-	. "$HOME/.profile"
-fi
+[[ ! -r "$HOME/.shrc" ]] || . "$HOME/.shrc"
+[[ ! -r "$HOME/.profile" ]] || . "$HOME/.profile"
 
 HISTFILE="$HOME/.zsh_history"
 SAVEHIST=524288
@@ -15,29 +10,12 @@ if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
 	. "$HOME/.iterm2_shell_integration.zsh"
 fi
 
-if which fzf >/dev/null; then
-	fzf-history-widget() {
-		BUFFER=$(fc -l -n -r 1 | awk '!seen[$0]++' | fzf --no-sort)
-		CURSOR=$#BUFFER
-	}
-	zle     -N    fzf-history-widget
-	bindkey '^R'  fzf-history-widget
+if which tv >/dev/null; then
+	eval "$(tv init zsh)"
 fi
 
-activate_android()
-{
-	local android_home="$HOME/Library/Android/sdk"
+if which starship >/dev/null; then
+	eval "$(starship init zsh)"
+fi
 
-	if [[ ! -d "$android_home" ]]; then
-		echo "activate_android: missing android sdk directory" 1>&2
-		return 1
-	fi
-
-	export ANDROID_HOME="$android_home"
-	PATH="$PATH:$ANDROID_HOME/emulator"
-	PATH="$PATH:$ANDROID_HOME/tools"
-	PATH="$PATH:$ANDROID_HOME/tools/bin"
-	PATH="$PATH:$ANDROID_HOME/platform-tools"
-
-	unset -f activate_android
-}
+# vim:set ft=sh:
