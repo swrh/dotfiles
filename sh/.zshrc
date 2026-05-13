@@ -18,4 +18,7 @@ if which starship >/dev/null; then
 	eval "$(starship init zsh)"
 fi
 
+# Load local zsh shell resources.
+[[ ! -f "${HOME}/.zshrc-local" ]] || . "${HOME}/.zshrc-local"
+
 # vim:set ft=sh:
