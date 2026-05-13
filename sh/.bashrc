@@ -33,6 +33,6 @@ if which starship >/dev/null; then
 fi
 
 # Load local bash shell resources.
-[ ! -f "${HOME}/.bashrc-local" ] || . "${HOME}/.bashrc-local"
+[[ ! -f "${HOME}/.bashrc-local" ]] || . "${HOME}/.bashrc-local"
 
 # vim:set ft=sh:
