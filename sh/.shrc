@@ -100,6 +100,14 @@ else
 	HISTFILE="${HOME}/.sh_history"
 fi
 
+if [ -x /opt/homebrew/bin/brew ]; then
+	if [ -n "$ZSH_VERSION" ]; then
+		eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+	else
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+	fi
+fi
+
 # https://github.com/rbenv/rbenv
 if [ -d "$HOME/.rbenv/bin" ]; then
 	PATH="$HOME/.rbenv/bin:$PATH"
