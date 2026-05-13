@@ -1,5 +1,6 @@
 # .bash_profile
 
-. "$HOME/.profile"
+[[ ! -r "$HOME/.profile" ]] || . "$HOME/.profile"
+[[ ! -r "$HOME/.bashrc" ]] || . "$HOME/.bashrc"
 
 # vim:set ft=sh:
