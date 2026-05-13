@@ -36,8 +36,9 @@
 #	default = simple
 
 [alias]
-	lg = log --decorate --graph --oneline
+	lg = log --date=relative --pretty='tformat:%>|(20)%C(auto)%h %C(auto,cyan)%>(13,trunc)%ad %C(auto,blue)%<(13,trunc)%aL %C(reset)%s%C(auto)%d' --graph
 	cl = clean -fdx -e .svn
+	wc = log --raw --no-merges # whatchanged
 
 [credential]
 	helper = cache
@@ -45,5 +46,17 @@
 [svn]
 	pushmergeinfo = true
 	rmdir = true
+
+[init]
+	defaultBranch = main
+
+[pull]
+	ff = only
+
+[fetch]
+	writeCommitGraph = true
+
+[checkout]
+	defaultRemote = origin
 
 # vim:set ft=gitconfig:
