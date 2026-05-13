@@ -124,6 +124,9 @@ alias gg='git grep'
 alias gl='git lg'
 alias gs='git status'
 
+alias c='chezmoi'
+alias cg='chezmoi git --'
+
 if which fdfind >/dev/null; then
 	alias fd='fdfind'
 fi
