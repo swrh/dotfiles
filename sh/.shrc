@@ -114,6 +114,7 @@ if [ -d "$HOME/.rbenv/bin" ]; then
 	eval "$(rbenv init -)"
 fi
 
+alias cd-git='cd "$(git rev-parse --show-toplevel)"'
 alias cd-nvim='cd ~/.config/nvim'
 
 alias ga='git add'
