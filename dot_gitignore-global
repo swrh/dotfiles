@@ -1,0 +1,9 @@
+.*.swp
+.clangd
+.svn
+CLAUDE.local.md
+__pycache__
+Session.vim
+compile_commands.json
+settings.local.json
+tags

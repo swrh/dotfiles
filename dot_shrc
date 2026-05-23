@@ -1,0 +1,146 @@
+# .shrc
+
+# If not running interactively, don't do anything.
+[ ! -z "${PS1}" -o "${-#*i}" != "${-}" ] || return 0
+
+# Enable color support of `ls'.
+_lsargs=""
+if ls -d -v / >/dev/null 2>&1; then
+	_lsargs="${_lsargs} -v"
+fi
+if ls -d --sort=name / >/dev/null 2>&1; then
+	_lsargs="${_lsargs} --sort=name"
+fi
+if [ "${TERM}" != "dumb" ]; then
+	if which dircolors >/dev/null 2>&1; then
+		eval "`dircolors -b`"
+	fi
+
+	if ls -d --color=auto / >/dev/null 2>&1; then
+		_lsargs="${_lsargs} --color=auto"
+	elif ls -d -G / >/dev/null 2>&1; then
+		_lsargs="${_lsargs} -G"
+	fi
+fi
+alias l="ls -laF${_lsargs}"
+unset _lsargs
+
+# Enable color support of `grep'.
+if [ "${TERM}" != "dumb" ] && grep --color=auto -qm1 . /etc/hosts >/dev/null 2>&1; then
+	alias grep="grep --color=auto"
+	alias fgrep="grep --color=auto -F"
+fi
+
+# More aliases.
+alias scr="screen -D -RR -s -${SHELL}"
+alias t="tmux new -As0"
+
+alias cd-git='cd "$(git rev-parse --show-toplevel)"'
+alias cd-nvim='cd ~/.config/nvim'
+
+alias g='git'
+
+if which chezmoi >/dev/null; then
+	alias c='chezmoi'
+	alias cg='chezmoi git --'
+fi
+
+if which fdfind >/dev/null; then
+	alias fd='fdfind'
+fi
+
+# Set the favorite editor.
+if which nvim >/dev/null 2>&1; then
+	EDITOR="nvim"
+	export EDITOR
+elif which vim >/dev/null 2>&1; then
+	EDITOR="vim"
+	export EDITOR
+elif which vi >/dev/null 2>&1; then
+	EDITOR="vi"
+	export EDITOR
+fi
+
+# Set the favorite pager.
+if which less >/dev/null 2>&1; then
+	PAGER="less"
+	export PAGER
+fi
+
+# `vi' mode on.
+set -o vi
+
+# Set PS1.
+if [ -n "$BASH_VERSION" ]; then
+	# Use a fancy PS1 when using `bash' to update `xterm' and `screen'
+	# title bars.
+	PS1='\h\$ '
+	case "${TERM}" in
+	xterm*|rxvt*|screen*)
+		_ps1="\\u@\\h: \\w"
+		_tty="`tty 2>/dev/null`"
+		[ $? -ne 0 ] || _ps1="${_ps1} (${_tty#/dev/})"
+		unset _tty
+		PS1="${PS1}\\[\\e]0;${_ps1}\\a\\]"
+		case "${TERM}" in
+		screen*)
+			PS1="${PS1}\\[\\ek${_ps1}\\e\\\\\\]"
+			;;
+		esac
+		unset _ps1
+		;;
+	*)
+		;;
+	esac
+elif [ -n "$ZSH_VERSION" ]; then
+	PS1='%m%# '
+else
+	# Nice and simple PS1.
+	PS1="`hostname -s`\\\$ "
+fi
+
+# Debian only: recognize what `chroot' you're currently working in.
+if [ -z "${debian_chroot}" -a -r /etc/debian_chroot ]; then
+	debian_chroot="`cat /etc/debian_chroot`"
+fi
+if [ ! -z "${debian_chroot}" ]; then
+	PS1="(${debian_chroot})${PS1}"
+fi
+
+# Don't recycle history too often.
+HISTSIZE=524288
+HISTFILESIZE=524288
+# Use a history file name different from the default to make sure that it will
+# only be used when HISTSIZE and HISTFILESIZE are set with 524288.
+if [ ! -z "${KSH_VERSION}" ]; then
+	HISTFILE="${HOME}/.ksh_history"
+else
+	HISTFILE="${HOME}/.sh_history"
+fi
+
+if [ -x /opt/homebrew/bin/brew ]; then
+	if [ -n "$ZSH_VERSION" ]; then
+		eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+	else
+		eval "$(/opt/homebrew/bin/brew shellenv)"
+	fi
+fi
+
+# https://github.com/rbenv/rbenv
+if [ -d "$HOME/.rbenv/bin" ]; then
+	PATH="$HOME/.rbenv/bin:$PATH"
+	eval "$(rbenv init -)"
+fi
+
+if which fnm >/dev/null 2>&1; then
+	eval "$(fnm env)"
+elif [ -d "$HOME/.nvm" ]; then
+	export NVM_DIR="$HOME/.nvm"
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+# Load local shell resources.
+[ ! -f "${HOME}/.shrc-local" ] || . "${HOME}/.shrc-local"
+
+# vim:set ft=sh:

@@ -1,0 +1,68 @@
+# .gitconfig
+
+[color]
+	ui = auto
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+
+[color "status"]
+	added = green bold
+	changed = red bold
+	untracked = red bold
+
+[core]
+	whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore-global
+
+[include]
+	path = .gitconfig-local
+
+[diff]
+	tool = vimdiff
+
+[merge]
+	tool = vimdiff
+
+[mergetool "meld"]
+	# Choose one of these 2 lines.
+	#cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+
+[push]
+#	default = simple
+
+[alias]
+	a = add
+	c = commit
+	d = diff
+	s = status
+	ci = commit
+	lg = log --date=relative --pretty='tformat:%>|(20)%C(auto)%h %C(auto,cyan)%>(13,trunc)%ad %C(auto,blue)%<(13,trunc)%aL %C(reset)%s%C(auto)%d' --graph
+	cl = clean -fdx -e .svn -e .hg
+	st = status
+	wc = log --raw --no-merges # whatchanged
+
+[credential]
+	helper = cache
+
+[svn]
+	pushmergeinfo = true
+	rmdir = true
+
+[init]
+	defaultBranch = main
+
+[pull]
+	ff = only
+
+[fetch]
+	writeCommitGraph = true
+
+[checkout]
+	defaultRemote = origin
+
+# vim:set ft=gitconfig:
