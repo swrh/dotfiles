@@ -26,6 +26,8 @@ complete -r
 
 if which tv >/dev/null; then
 	eval "$(tv init bash)"
+elif which fzf >/dev/null; then
+	eval "$(fzf --bash)"
 fi
 
 if which starship >/dev/null; then
