@@ -1,0 +1,82 @@
+#!/bin/sh
+#
+# Copyright (C) 2009 Fernando Silveira <fsilveira@gmail.com>
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 1. Redistributions of source code must retain the above copyright notice,
+#    this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 3. All advertising materials mentioning features or use of this software must
+#    display the following acknowledgement:
+#      This product includes software developed by Fernando Silveira.
+# 4. The name of the author may not be used to endorse or promote products
+#    derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+# WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO
+# EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+# SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+# PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+# OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+# WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+# OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+# ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+help()
+{
+	cat << EOF
+usage: ${0##*/} [-h] TRAILER CMD [ARGS]
+
+Suppose you want to create symlinks for many files using find, xargs, and ln.
+Without argsx you would need the \`-I{}' option, which makes xargs execute one
+ln command per file. If find prints thousands of files, xargs runs ln thousands
+of times -- a significant performance hit, especially on older machines. Using
+argsx, xargs executes far fewer commands, depending on your OS, configuration,
+and the number of files.
+
+For example, this command runs ln once per file (about 15,800 times):
+
+  $ find /orig-dir -type f -print0 | xargs -0 -I{} ln -s {} /dest-dir
+
+With argsx, ln runs only 7 times:
+
+  $ find /orig-dir -type f -print0 | xargs -0 argsx /dest-dir ln -s
+
+CMD is the command to run. TRAILER is appended as its final argument, after
+any xargs-supplied arguments and any ARGS.
+EOF
+}
+
+main()
+{
+	case "${1-}" in
+		-h|--help)
+			help
+			exit 0
+			;;
+		--)
+			shift
+			;;
+		*)
+			;;
+	esac
+
+	if [ $# -lt 2 ]; then
+		echo "${0##*/}: invalid number of arguments" 1>&2
+		echo "usage: ${0##*/} [-h] TRAILER CMD [ARGS]" 1>&2
+		exit 1
+	fi
+
+	trailer="$1"
+	shift
+	exec "$@" "${trailer}"
+}
+
+main "$@"
+
+# vim:set sw=2 ts=2 noet:

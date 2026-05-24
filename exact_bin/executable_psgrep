@@ -1,0 +1,7 @@
+#!/bin/sh
+
+pids="`pgrep -d, "$@"`"
+test ! -z "$pids" || exit 1
+exec ps -fp "$pids"
+
+# vim:set sw=2 ts=2 noet:

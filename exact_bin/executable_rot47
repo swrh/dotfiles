@@ -1,0 +1,5 @@
+#!/bin/sh
+
+exec tr '!-~' 'P-~!-O' "$@"
+
+# vim:set sw=2 ts=2 noet:
