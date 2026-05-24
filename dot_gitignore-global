@@ -1,5 +1,6 @@
 .*.swp
 .clangd
+.env
 .svn
 CLAUDE.local.md
 __pycache__

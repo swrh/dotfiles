@@ -1,14 +1,18 @@
 # .zshrc
 
 [[ ! -r "$HOME/.shrc" ]] || . "$HOME/.shrc"
-[[ ! -r "$HOME/.profile" ]] || . "$HOME/.profile"
 
-HISTFILE="$HOME/.zsh_history"
-SAVEHIST=524288
+# Skip if not running interactively
+[ ! -z "${PS1}" -o "${-#*i}" != "${-}" ] || return 0
 
-if [[ -r "$HOME/.iterm2_shell_integration.zsh" ]]; then
-	. "$HOME/.iterm2_shell_integration.zsh"
-fi
+[[ ! -r "$HOME/.iterm2_shell_integration.zsh" ]] || . "$HOME/.iterm2_shell_integration.zsh"
+
+setopt HIST_FIND_NO_DUPS	# skip duplicates when navigating with UP arrow
+setopt HIST_IGNORE_ALL_DUPS	# remove older duplicate when a new one is added
+setopt HIST_IGNORE_DUPS		# skip saving if same as previous command
+setopt HIST_IGNORE_SPACE	# don't save commands that start with a space
+setopt HIST_SAVE_NO_DUPS	# don't write duplicates to the history file
+setopt INTERACTIVE_COMMENTS	# allow # comments on the command line
 
 autoload -Uz compinit
 compinit
@@ -24,6 +28,6 @@ if which starship >/dev/null; then
 fi
 
 # Load local zsh shell resources.
-[[ ! -f "${HOME}/.zshrc-local" ]] || . "${HOME}/.zshrc-local"
+[[ ! -r "$HOME/.zshrc-local" ]] || . "$HOME/.zshrc-local"
 
-# vim:set ft=sh:
+# vim:set sw=2 ts=2 noet ft=sh:
