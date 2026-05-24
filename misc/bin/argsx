@@ -30,49 +30,53 @@
 help()
 {
 	cat << EOF
-usage: ${0##*/} [-h] LAST FIRST [ARGS]
+usage: ${0##*/} [-h] TRAILER CMD [ARGS]
 
-Supose you want to create hardlinks of lots of files using find, xargs and ln.
-Without argsx you would need to use the \`-I{}' option which makes xargs
-execute one ln command for each file find prints. If find prints a zillion
-files, xargs will execute ln a zillion times. This is a big waste of
-performance, specially if you have an old machine. Using argsx, xargs would
-execute about MANY times less commands, depending on your OS type,
-configuration and on the found files.
+Suppose you want to create symlinks for many files using find, xargs, and ln.
+Without argsx you would need the \`-I{}' option, which makes xargs execute one
+ln command per file. If find prints thousands of files, xargs runs ln thousands
+of times -- a significant performance hit, especially on older machines. Using
+argsx, xargs executes far fewer commands, depending on your OS, configuration,
+and the number of files.
 
-Using the command below, specifically in this example, xargs executes about
-15800 times the ln command:
+For example, this command runs ln once per file (about 15,800 times):
 
   $ find /orig-dir -type f -print0 | xargs -0 -I{} ln -s {} /dest-dir
 
-Using argsx, xargs executes ln only 7 times:
+With argsx, ln runs only 7 times:
 
   $ find /orig-dir -type f -print0 | xargs -0 argsx /dest-dir ln -s
 
-The command that will be executed is the second argument passed to argsx. The
-last argument passed to the executed command is the first argsx argument. The
-subsequent arguments are passed to the command before the last.
-
-If you want to contribute to the development of this script, please help on
-improving this description/usage message.
+CMD is the command to run. TRAILER is appended as its final argument, after
+any xargs-supplied arguments and any ARGS.
 EOF
 }
 
-case "${1-}" in
-	-h)
-		help
-		exit 0
-		;;
-	*)
-		;;
-esac
+main()
+{
+	case "${1-}" in
+		-h|--help)
+			help
+			exit 0
+			;;
+		--)
+			shift
+			;;
+		*)
+			;;
+	esac
 
-if [ $# -lt 2 ]; then
-	echo "${0##*/}: invalid number of arguments" 1>&2
-	echo "usage: ${0##*/} [-h] LAST FIRST [ARGS]" 1>&2
-	exit 1
-fi
+	if [ $# -lt 2 ]; then
+		echo "${0##*/}: invalid number of arguments" 1>&2
+		echo "usage: ${0##*/} [-h] TRAILER CMD [ARGS]" 1>&2
+		exit 1
+	fi
 
-last="$1"
-shift 1
-exec "$@" "${last}"
+	trailer="$1"
+	shift
+	exec "$@" "${trailer}"
+}
+
+main "$@"
+
+# vim:set sw=2 ts=2 noet:
