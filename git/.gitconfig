@@ -36,8 +36,11 @@
 #	default = simple
 
 [alias]
+	ci = commit
+	cl = clean -fdx -e .svn -e .hg
+	co = checkout
 	lg = log --date=relative --pretty='tformat:%>|(20)%C(auto)%h %C(auto,cyan)%>(13,trunc)%ad %C(auto,blue)%<(13,trunc)%aL %C(reset)%s%C(auto)%d' --graph
-	cl = clean -fdx -e .svn
+	st = status
 	wc = log --raw --no-merges # whatchanged
 
 [credential]
