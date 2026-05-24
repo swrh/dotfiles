@@ -3,3 +3,5 @@
 set -euo pipefail
 password_selected=$(cd ~/.password-store && find * -name \*.gpg | sed 's/\.gpg$//' | fzf)
 exec pass "$@" "$password_selected"
+
+# vim:set sw=2 ts=2 noet:

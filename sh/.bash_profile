@@ -3,4 +3,4 @@
 [[ ! -r "$HOME/.profile" ]] || . "$HOME/.profile"
 [[ ! -r "$HOME/.bashrc" ]] || . "$HOME/.bashrc"
 
-# vim:set ft=sh:
+# vim:set sw=2 ts=2 noet ft=sh:

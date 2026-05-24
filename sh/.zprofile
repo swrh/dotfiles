@@ -2,4 +2,4 @@
 
 [[ ! -r "$HOME/.profile" ]] || . "$HOME/.profile"
 
-# vim:set ft=sh:
+# vim:set sw=2 ts=2 noet ft=sh:
