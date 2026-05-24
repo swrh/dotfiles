@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash
 
 err()
 {
@@ -36,7 +36,8 @@ hlndir()
 
 main()
 {
-	local cmdprefix=()
+	set -e
+	local lncmd=()
 	while [[ $# -gt 0 ]]; do
 		case "$1" in
 		-h|--help)
@@ -44,7 +45,7 @@ main()
 			exit 0
 			;;
 		--sudo)
-			cmdprefix=("sudo")
+			lncmd=("sudo")
 			;;
 		*)
 			break
@@ -52,10 +53,12 @@ main()
 		esac
 		shift
 	done
-	local lncmd=("${cmdprefix[@]}" ln -fv)
+	lncmd+=(ln -fv)
 	shopt -s nullglob
 	shopt -s dotglob
 	hlndir "$@"
 }
 
 main "$@"
+
+# vim:set sw=2 ts=2 noet:
