@@ -39,14 +39,14 @@ if [[ ! -d "$fonts_dir" ]]; then
 fi
 
 for font in "${fonts[@]}"; do
-  zip_file="${font}.zip"
-  if [[ ! -f "$zip_file" ]]; then
-    download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${zip_file}"
+  txz_file="${font}.tar.xz"
+  if [[ ! -f "$txz_file" ]]; then
+    download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${version}/${txz_file}"
     echo "Downloading $download_url"
-    wget "$download_url" -O "$zip_file~"
-    mv "$zip_file~" "$zip_file"
+    curl -fsSL "$download_url" -o "$txz_file~"
+    mv "$txz_file~" "$txz_file"
   fi
-  unzip -o "$zip_file" -d "$fonts_dir"
+  tar -xJf "$txz_file" -d "$fonts_dir"
 done
 
 find "$fonts_dir" -name 'Windows Compatible' -delete
@@ -54,8 +54,8 @@ find "$fonts_dir" -name 'Windows Compatible' -delete
 fc-cache -fv
 
 for font in "${fonts[@]}"; do
-  zip_file="${font}.zip"
-  rm -f "$zip_file"
+  txz_file="${font}.tar.xz"
+  rm -f "$txz_file"
 done
 
 # vim:set sw=2 ts=2 et:
