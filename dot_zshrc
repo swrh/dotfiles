@@ -17,10 +17,10 @@ setopt INTERACTIVE_COMMENTS	# allow # comments on the command line
 autoload -Uz compinit
 compinit
 
-if which tv >/dev/null; then
-	eval "$(tv init zsh)"
-elif which fzf >/dev/null; then
+if which fzf >/dev/null; then
 	eval "$(fzf --zsh)"
+elif which tv >/dev/null; then
+	eval "$(tv init zsh)"
 fi
 
 if which starship >/dev/null; then
