@@ -24,7 +24,9 @@ shopt -s checkwinsize
 # Disable stupid bash completion.
 complete -r
 
-if which tv >/dev/null; then
+if which fzf >/dev/null; then
+	eval "$(fzf --bash)"
+elif which tv >/dev/null; then
 	eval "$(tv init bash)"
 fi
 
@@ -33,6 +35,6 @@ if which starship >/dev/null; then
 fi
 
 # Load local bash shell resources.
-[[ ! -f "${HOME}/.bashrc-local" ]] || . "${HOME}/.bashrc-local"
+[[ ! -r "$HOME/.bashrc-local" ]] || . "$HOME/.bashrc-local"
 
-# vim:set ft=sh:
+# vim:set sw=2 ts=2 noet ft=sh:

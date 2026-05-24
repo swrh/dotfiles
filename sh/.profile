@@ -1,33 +1,18 @@
 # .profile
 
 # Configure default locale settings.
-if [ -z "${LANG}" ]; then
-	LANG="C"
-	export LANG
-fi
+[ -n "$LANG" ] || export LANG="C"
 
 # The default umask is set in /etc/profile; for setting the umask
 # for ssh logins, install and configure the libpam-umask package.
 umask 022
 
+[ ! -d "$HOME/bin" ] || PATH="$HOME/bin:$PATH"
+[ ! -d "$HOME/.local/bin" ] || PATH="$HOME/.local/bin:$PATH"
+
+export LESS="-R"
+
 # include local .profile if it exists
-if [ -f "$HOME/.profile-local" ]; then
-	. "$HOME/.profile-local"
-fi
+[ ! -r "$HOME/.profile-local" ] || . "$HOME/.profile-local"
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-	PATH="$HOME/bin:$PATH"
-fi
-
-PATH="$PATH:/usr/local/sbin:/usr/sbin:/sbin"
-PATH="$PATH:$HOME/.local/bin:/usr/local/sbin:/usr/sbin:/sbin"
-
-LESS="-R"; export LESS
-
-mkcd()
-{
-	mkdir -p "$@" && cd "$@"
-}
-
-# vim:set ft=sh:
+# vim:set sw=2 ts=2 noet ft=sh:
