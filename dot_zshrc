@@ -32,6 +32,9 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey -M vicmd '^G' edit-command-line
 
+# Fix ESC lag in zsh (reduce key sequence timeout to 10ms)
+KEYTIMEOUT=1
+
 # Load local zsh shell resources.
 [[ ! -r "$HOME/.zshrc-local" ]] || . "$HOME/.zshrc-local"
 
