@@ -7,13 +7,15 @@
 
 [[ ! -r "$HOME/.iterm2_shell_integration.zsh" ]] || . "$HOME/.iterm2_shell_integration.zsh"
 
-setopt HIST_FIND_NO_DUPS	# skip duplicates when navigating with UP arrow
+setopt HIST_FIND_NO_DUPS		# skip duplicates when navigating with UP arrow
 setopt HIST_IGNORE_ALL_DUPS	# remove older duplicate when a new one is added
-setopt HIST_IGNORE_DUPS		# skip saving if same as previous command
-setopt HIST_IGNORE_SPACE	# don't save commands that start with a space
-setopt HIST_SAVE_NO_DUPS	# don't write duplicates to the history file
+setopt HIST_IGNORE_DUPS			# skip saving if same as previous command
+setopt HIST_IGNORE_SPACE		# don't save commands that start with a space
+setopt HIST_SAVE_NO_DUPS		# don't write duplicates to the history file
 setopt INTERACTIVE_COMMENTS	# allow # comments on the command line
-
+setopt RM_STAR_SILENT     	# don't prompt when deleting with a star glob
+ 
+# Initialize zsh's tab-completion system
 autoload -Uz compinit
 compinit
 
@@ -34,9 +36,6 @@ bindkey -M vicmd '^G' edit-command-line
 
 # Fix ESC lag in zsh (reduce key sequence timeout to 10ms)
 KEYTIMEOUT=1
-
-# Don't prompt when deleting with a star glob
-setopt RM_STAR_SILENT
 
 # Load local zsh shell resources.
 [[ ! -r "$HOME/.zshrc-local" ]] || . "$HOME/.zshrc-local"
