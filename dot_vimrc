@@ -141,31 +141,6 @@ nnoremap ]f :next<cr>z.
 map <c-p> :cprev<cr>z.:cc<cr>
 map <c-n> :cnext<cr>z.:cc<cr>
 
-" git grep function
-func GitGrep(...)
-  let save = &grepprg
-  set grepprg=git\ grep\ -n\ $*
-  let s = 'grep'
-  for i in a:000
-    let s = s . ' ' . i
-  endfor
-  exe s
-  let &grepprg = save
-endfun
-command -nargs=+ -complete=file G call GitGrep(<f-args>)
-
-" search for the current word in git
-nmap <leader>g :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>G
-nmap <leader>G :silent G '<c-r>/'<cr>:redraw!<cr>:cc<cr>z.
-
-" search for the current word in C/C++, Python and make files
-nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
-nmap <leader>V :silent vimgrep /<c-r>// **/*.[CcHh] **/*.[ch]pp **/*.cc **/*.py **/Makefile **/*.java **/*.xml **/*.txt **/*.cmake **/*.proto *.sh<cr>z.
-
-" ctags ftw
-nmap <leader>tf :!rm -f tags && find . -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0 ctags -a<cr>
-nmap <leader>tg :!rm -f tags && git ls-files -z \| xargs -0 ctags -a<cr>
-
 " persistent undo
 if version >= 703
   if !isdirectory($HOME.'/.vim')
@@ -180,16 +155,6 @@ if version >= 703
 endif
 
 set undolevels=1000
-
-" CtrlP plugin (https://github.com/ctrlpvim/ctrlp.vim):
-" git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
 
 "let g:is_bash = 1
 
