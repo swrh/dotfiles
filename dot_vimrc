@@ -141,24 +141,6 @@ nnoremap ]f :next<cr>z.
 map <c-p> :cprev<cr>z.:cc<cr>
 map <c-n> :cnext<cr>z.:cc<cr>
 
-" set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for
-" MS Windows
-behave xterm
-
-" For CTRL-V to work autoselect must be off.
-" On Unix we have two selections, autoselect can be used.
-if !has("unix")
-  set guioptions-=a
-endif
-
-" Alt-Space is System menu
-if has("gui")
-  noremap <M-Space> :simalt ~<CR>
-  inoremap <M-Space> <C-O>:simalt ~<CR>
-  cnoremap <M-Space> <C-C>:simalt ~<CR>
-  set guifont=courier_new:h9
-endif
-
 " git grep function
 func GitGrep(...)
   let save = &grepprg
