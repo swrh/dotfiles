@@ -5,6 +5,8 @@
 " some modifications by J.H.M. Dassen <jdassen@wi.leidenuniv.nl>
 " even more modifications by Fernando Silveira <fsilveira@gmail.com>
 
+let mapleader = "\<space>"
+
 " normally we use vim-extensions. if you want true vi-compatibility
 " comment the following statements
 set nocompatible        " use vim defaults (much better!)
@@ -34,7 +36,8 @@ set mouse=a             " enable mouse control
 
 set showmatch           " briefly jump to matching brackets
 set showmode            " the mode we're in
-"set number              " show line numbers
+set number              " show line numbers
+set relativenumber      " show relative line numbers
 if v:version >= 700
   set numberwidth=5     " use 5 columns for them
 endif
@@ -113,18 +116,26 @@ set list listchars=eol:$,tab:>.,trail:.
 set fileformats=unix,dos  " Vim's default on UNIX, also use it on DOS
 
 " abbreviations
-iab _VERSION <c-r>=strftime("%Y%m%d")<cr>
+iab _VERSION <c-r>=strftime("%Y-%m-%d")<cr>
 
 " ctrl-] fix
 map <c-\> <c-]>
 
-nnoremap <a-l> :buffers<cr>:buffer<space>
-nnoremap <a-n> :bn<cr>
-nnoremap <a-p> :bp<cr>
+" window navigation
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+
+" quit and save/quit mappings
+nnoremap <c-q> :q<cr>
+nnoremap <leader>qq :qa<cr>
+nnoremap <leader>wq :wqa<cr>
+nnoremap <leader>ww :wa<cr>
 
 " previous and next opened file
-map <f9> :prev<cr>z.
-map <f10> :next<cr>z.
+nnoremap [f :prev<cr>z.
+nnoremap ]f :next<cr>z.
 
 " previous and next compiler error (quickfix)
 map <c-p> :cprev<cr>z.:cc<cr>
