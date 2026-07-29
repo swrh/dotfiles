@@ -41,7 +41,6 @@ fi
 
 if which chezmoi >/dev/null; then
 	alias cm='chezmoi'
-	alias cmgit='chezmoi git --'
 	alias cd-chezmoi='cd ~/.local/share/chezmoi'
 fi
 
