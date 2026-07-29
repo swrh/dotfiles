@@ -45,6 +45,10 @@ if which chezmoi >/dev/null; then
 	alias cd-chezmoi='cd ~/.local/share/chezmoi'
 fi
 
+if which batcat >/dev/null; then
+	alias bat='batcat'
+fi
+
 if which fdfind >/dev/null; then
 	alias fd='fdfind'
 fi
