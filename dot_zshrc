@@ -14,7 +14,7 @@ setopt HIST_IGNORE_SPACE		# don't save commands that start with a space
 setopt HIST_SAVE_NO_DUPS		# don't write duplicates to the history file
 setopt INTERACTIVE_COMMENTS	# allow # comments on the command line
 setopt RM_STAR_SILENT     	# don't prompt when deleting with a star glob
- 
+
 if which fzf >/dev/null; then
 	eval "$(fzf --zsh)"
 elif which tv >/dev/null; then
