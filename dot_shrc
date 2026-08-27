@@ -12,7 +12,7 @@ if ls -d --sort=name / >/dev/null 2>&1; then
 	_lsargs="$_lsargs --sort=name"
 fi
 if [ "$TERM" != "dumb" ]; then
-	if which dircolors >/dev/null; then
+	if command -v dircolors >/dev/null; then
 		eval "`dircolors -b`"
 	fi
 
@@ -35,37 +35,37 @@ fi
 alias scr="screen -D -RR -s -$SHELL"
 alias t="tmux new -As0"
 
-if which git >/dev/null; then
+if command -v git >/dev/null; then
 	alias cd-git='cd "$(git rev-parse --show-toplevel)"'
 fi
 
-if which chezmoi >/dev/null; then
+if command -v chezmoi >/dev/null; then
 	alias cm='chezmoi'
 	alias cd-chezmoi='cd ~/.local/share/chezmoi'
 fi
 
-if which batcat >/dev/null; then
+if command -v batcat >/dev/null; then
 	alias bat='batcat'
 fi
 
-if which fdfind >/dev/null; then
+if command -v fdfind >/dev/null; then
 	alias fd='fdfind'
 fi
 
 # Set my favorite editor
-if which nvim >/dev/null; then
+if command -v nvim >/dev/null; then
 	export EDITOR="nvim"
 	alias cd-nvim='cd ~/.config/nvim'
 	alias vicb='nvim -n +"%d _ | put + | 1d _" +"set buftype=acwrite" +"file clipboard://" +'\''au BufWriteCmd <buffer> let @+=join(getline(1,"$"),"\n") | set nomod'\'
-elif which vim >/dev/null; then
+elif command -v vim >/dev/null; then
 	export EDITOR="vim"
 	alias vicb='vim -n +"%d _ | put + | 1d _" +"set buftype=acwrite" +"file clipboard://" +'\''au BufWriteCmd <buffer> let @+=join(getline(1,"$"),"\n") | set nomod'\'
-elif which vi >/dev/null; then
+elif command -v vi >/dev/null; then
 	export EDITOR="vi"
 fi
 
 # Set my favorite pager
-if which less >/dev/null; then
+if command -v less >/dev/null; then
 	export PAGER="less"
 fi
 
@@ -128,7 +128,7 @@ if [ -d "$HOME/.rbenv/bin" ]; then
 	eval "$(rbenv init -)"
 fi
 
-if which fnm >/dev/null; then # https://github.com/Schniz/fnm
+if command -v fnm >/dev/null; then # https://github.com/Schniz/fnm
 	eval "$(fnm env)"
 elif [ -d "$HOME/.nvm" -a -r "$NVM_DIR/nvm.sh" ]; then
 	export NVM_DIR="$HOME/.nvm"
