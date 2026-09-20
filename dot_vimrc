@@ -5,6 +5,8 @@
 " some modifications by J.H.M. Dassen <jdassen@wi.leidenuniv.nl>
 " even more modifications by Fernando Silveira <fsilveira@gmail.com>
 
+let mapleader = "\<space>"
+
 " normally we use vim-extensions. if you want true vi-compatibility
 " comment the following statements
 set nocompatible        " use vim defaults (much better!)
@@ -34,7 +36,8 @@ set mouse=a             " enable mouse control
 
 set showmatch           " briefly jump to matching brackets
 set showmode            " the mode we're in
-"set number              " show line numbers
+set number              " show line numbers
+set relativenumber      " show relative line numbers
 if v:version >= 700
   set numberwidth=5     " use 5 columns for them
 endif
@@ -113,65 +116,30 @@ set list listchars=eol:$,tab:>.,trail:.
 set fileformats=unix,dos  " Vim's default on UNIX, also use it on DOS
 
 " abbreviations
-iab _VERSION <c-r>=strftime("%Y%m%d")<cr>
+iab _VERSION <c-r>=strftime("%Y-%m-%d")<cr>
 
 " ctrl-] fix
 map <c-\> <c-]>
 
-nnoremap <a-l> :buffers<cr>:buffer<space>
-nnoremap <a-n> :bn<cr>
-nnoremap <a-p> :bp<cr>
+" window navigation
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+nnoremap <c-k> <c-w>k
+nnoremap <c-j> <c-w>j
+
+" quit and save/quit mappings
+nnoremap <c-q> :q<cr>
+nnoremap <leader>qq :qa<cr>
+nnoremap <leader>wq :wqa<cr>
+nnoremap <leader>ww :wa<cr>
 
 " previous and next opened file
-map <f9> :prev<cr>z.
-map <f10> :next<cr>z.
+nnoremap [f :prev<cr>z.
+nnoremap ]f :next<cr>z.
 
 " previous and next compiler error (quickfix)
 map <c-p> :cprev<cr>z.:cc<cr>
 map <c-n> :cnext<cr>z.:cc<cr>
-
-" set 'selection', 'selectmode', 'mousemodel' and 'keymodel' for
-" MS Windows
-behave xterm
-
-" For CTRL-V to work autoselect must be off.
-" On Unix we have two selections, autoselect can be used.
-if !has("unix")
-  set guioptions-=a
-endif
-
-" Alt-Space is System menu
-if has("gui")
-  noremap <M-Space> :simalt ~<CR>
-  inoremap <M-Space> <C-O>:simalt ~<CR>
-  cnoremap <M-Space> <C-C>:simalt ~<CR>
-  set guifont=courier_new:h9
-endif
-
-" git grep function
-func GitGrep(...)
-  let save = &grepprg
-  set grepprg=git\ grep\ -n\ $*
-  let s = 'grep'
-  for i in a:000
-    let s = s . ' ' . i
-  endfor
-  exe s
-  let &grepprg = save
-endfun
-command -nargs=+ -complete=file G call GitGrep(<f-args>)
-
-" search for the current word in git
-nmap <leader>g :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>G
-nmap <leader>G :silent G '<c-r>/'<cr>:redraw!<cr>:cc<cr>z.
-
-" search for the current word in C/C++, Python and make files
-nmap <leader>v :let @/ = '\<<c-r>=expand('<cword>')<cr>\>'<cr><leader>V
-nmap <leader>V :silent vimgrep /<c-r>// **/*.[CcHh] **/*.[ch]pp **/*.cc **/*.py **/Makefile **/*.java **/*.xml **/*.txt **/*.cmake **/*.proto *.sh<cr>z.
-
-" ctags ftw
-nmap <leader>tf :!rm -f tags && find . -name '*.[ch]pp' -or -name '*.[ch]' -or -name '*.py' -print0 \| xargs -0 ctags -a<cr>
-nmap <leader>tg :!rm -f tags && git ls-files -z \| xargs -0 ctags -a<cr>
 
 " persistent undo
 if version >= 703
@@ -187,16 +155,6 @@ if version >= 703
 endif
 
 set undolevels=1000
-
-" CtrlP plugin (https://github.com/ctrlpvim/ctrlp.vim):
-" git clone https://github.com/ctrlpvim/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<leader>p'
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
 
 "let g:is_bash = 1
 
