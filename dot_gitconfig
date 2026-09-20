@@ -25,12 +25,15 @@
 	tool = vimdiff
 
 [merge]
-	tool = vimdiff
+	tool = nvimdiff
+	conflictstyle = diff3
 
-[mergetool "meld"]
-	# Choose one of these 2 lines.
-	#cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-	cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+[mergetool]
+	keepBackup = false
+	prompt = false
+
+[mergetool "nvimdiff"]
+	layout = "LOCAL,BASE,REMOTE / MERGED"
 
 [push]
 #	default = simple
