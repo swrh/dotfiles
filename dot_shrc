@@ -33,7 +33,7 @@ fi
 
 # More aliases.
 alias scr="screen -D -RR -s -$SHELL"
-alias t="tmux new -As0"
+alias t='env -C "$HOME" tmux new -As0'
 
 if command -v git >/dev/null; then
 	alias cd-git='cd "$(git rev-parse --show-toplevel)"'
