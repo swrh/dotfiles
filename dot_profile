@@ -13,6 +13,8 @@ umask 022
 
 export LESS="-R"
 
+[ ! -r "$HOME/.local/bin/env" ] || . "$HOME/.local/bin/env"
+
 # include local .profile if it exists
 [ ! -r "$HOME/.profile-local" ] || . "$HOME/.profile-local"
 
