@@ -10,6 +10,7 @@ umask 022
 [ ! -d "$HOME/bin" ] || PATH="$HOME/bin:$PATH"
 [ ! -d "$HOME/.local/bin" ] || PATH="$HOME/.local/bin:$PATH"
 [ ! -d "$HOME/.docker/bin" ] || PATH="$HOME/.docker/bin:$PATH"
+[ ! -d "$HOME/.bun" ] || { export BUN_INSTALL="$HOME/.bun"; PATH="$BUN_INSTALL/bin:$PATH"; }
 
 export LESS="-R"
 
