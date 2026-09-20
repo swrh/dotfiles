@@ -43,7 +43,7 @@
 	cl = clean -fdx -e .svn -e .hg
 	co = checkout
 	lg = log --date=relative --pretty='tformat:%>|(20)%C(auto)%h %C(auto,cyan)%>(13,trunc)%ad %C(auto,blue)%<(13,trunc)%aL %C(reset)%s%C(auto)%d' --graph
-	st = status
+	st = status --short
 	wc = log --raw --no-merges # whatchanged
 
 [credential]
