@@ -130,7 +130,7 @@ if [ -d "$HOME/.rbenv/bin" ]; then
 fi
 
 if command -v fnm >/dev/null; then # https://github.com/Schniz/fnm
-	eval "$(fnm env)"
+	eval "$(fnm env --use-on-cd)"
 elif [ -d "$HOME/.nvm" -a -r "$NVM_DIR/nvm.sh" ]; then
 	export NVM_DIR="$HOME/.nvm"
 	. "$NVM_DIR/nvm.sh"
