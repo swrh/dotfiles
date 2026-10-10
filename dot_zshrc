@@ -25,6 +25,10 @@ if command -v starship >/dev/null; then
 	eval "$(starship init zsh)"
 fi
 
+if command -v wt >/dev/null; then
+	eval "$(command wt config shell init zsh)"
+fi
+
 # ^G to edit buffer in $EDITOR (like vi's `v` in bash vi-mode)
 autoload -Uz edit-command-line
 zle -N edit-command-line

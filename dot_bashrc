@@ -34,6 +34,10 @@ if command -v starship >/dev/null; then
 	eval "$(starship init bash)"
 fi
 
+if command -v wt >/dev/null; then
+	eval "$(command wt config shell init bash)"
+fi
+
 # Load local bash shell resources.
 [[ ! -r "$HOME/.bashrc-local" ]] || . "$HOME/.bashrc-local"
 
