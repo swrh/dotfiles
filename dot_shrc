@@ -132,6 +132,9 @@ fi
 if [ -d "$HOME/.rbenv/bin" ]; then
 	PATH="$HOME/.rbenv/bin:$PATH"
 	eval "$(rbenv init -)"
+elif command -v ruby >/dev/null; then
+	_ruby_path="$(ruby -e 'puts Gem.bindir(Gem.user_dir)')" && PATH="$_ruby_path:$PATH"
+	unset _ruby_path
 fi
 
 if command -v fnm >/dev/null; then # https://github.com/Schniz/fnm
