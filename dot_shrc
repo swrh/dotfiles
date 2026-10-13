@@ -70,6 +70,11 @@ if command -v less >/dev/null; then
 	export PAGER="less"
 fi
 
+# https://worktrunk.dev/
+if command -v wt >/dev/null; then
+	alias wtsw='wt switch'
+fi
+
 # Set `vi' mode
 set -o vi
 
