@@ -1,10 +1,11 @@
+__pycache__
 .*.swp
 .clangd
 .env
 .svn
 CLAUDE.local.md
-__pycache__
-Session.vim
 compile_commands.json
+graphify-out
+Session.vim
 settings.local.json
 tags
