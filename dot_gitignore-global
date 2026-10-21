@@ -1,8 +1,10 @@
 __pycache__
 .*.swp
 .clangd
+.DS_Store
 .env
 .svn
+*.bak
 CLAUDE.local.md
 compile_commands.json
 graphify-out
