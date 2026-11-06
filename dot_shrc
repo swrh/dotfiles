@@ -3,6 +3,31 @@
 # Skip if not running interactively
 [ ! -z "${PS1}" -o "${-#*i}" != "${-}" ] || return 0
 
+# zsh only: source the output of a slow init command from a cache file.
+# Usage: _cached_eval NAME COMMAND [ARGS...]
+# The cache is rebuilt when the resolved path of COMMAND changes (e.g. a
+# Homebrew upgrade moves it to a new Cellar version dir). To force a rebuild
+# of everything, run `zsh-cache-clear`.
+if [ -n "$ZSH_VERSION" ]; then
+	_zsh_cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/zsh"
+	_cached_eval()
+	{
+		local name=$1; shift
+		local bin=${commands[$1]:-$1}
+		bin=${bin:A}
+		[[ -x $bin ]] || return 1
+		local cache="$_zsh_cache_dir/$name.zsh" header="# src: $bin" first=
+		[[ ! -r $cache ]] || IFS= read -r first < "$cache"
+		if [[ $first != $header ]]; then
+			mkdir -p "$_zsh_cache_dir" || return 1
+			{ print -r -- "$header"; command "$@"; } >| "$cache.$$" \
+				&& mv -f "$cache.$$" "$cache" || { rm -f "$cache.$$"; return 1; }
+		fi
+		source "$cache"
+	}
+	alias zsh-cache-clear='rm -rf "$_zsh_cache_dir"'
+fi
+
 # Enable color support for `ls`
 _lsargs=""
 if ls -d -v / >/dev/null 2>&1; then
@@ -122,7 +147,7 @@ fi
 
 if [ -x /opt/homebrew/bin/brew ]; then
 	if [ -n "$ZSH_VERSION" ]; then
-		eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+		_cached_eval brew-shellenv /opt/homebrew/bin/brew shellenv zsh
 	else
 		eval "$(/opt/homebrew/bin/brew shellenv)"
 	fi
@@ -138,8 +163,17 @@ if [ -d "$HOME/.rbenv/bin" ]; then
 	PATH="$HOME/.rbenv/bin:$PATH"
 	eval "$(rbenv init -)"
 elif command -v ruby >/dev/null; then
-	_ruby_path="$(ruby -e 'puts Gem.bindir(Gem.user_dir)')" && PATH="$_ruby_path:$PATH"
-	unset _ruby_path
+	# Avoid spawning ruby (~60ms): look for the user gem bindir directly and
+	# only ask ruby when it does not exist yet.
+	_ruby_path=
+	[ -z "$ZSH_VERSION" ] || setopt null_glob
+	for _d in "$HOME"/.local/share/gem/ruby/*/bin "$HOME"/.gem/ruby/*/bin; do
+		[ ! -d "$_d" ] || _ruby_path=$_d
+	done
+	[ -z "$ZSH_VERSION" ] || unsetopt null_glob
+	[ -n "$_ruby_path" ] || _ruby_path="$(ruby -e 'puts Gem.bindir(Gem.user_dir)')"
+	[ -z "$_ruby_path" ] || PATH="$_ruby_path:$PATH"
+	unset _ruby_path _d
 fi
 
 if command -v fnm >/dev/null; then # https://github.com/Schniz/fnm

@@ -16,7 +16,7 @@ setopt INTERACTIVE_COMMENTS	# allow # comments on the command line
 setopt RM_STAR_SILENT     	# don't prompt when deleting with a star glob
 
 if command -v fzf >/dev/null; then
-	eval "$(fzf --zsh)"
+	_cached_eval fzf fzf --zsh
 elif command -v tv >/dev/null; then
 	eval "$(tv init zsh)"
 fi
@@ -26,7 +26,7 @@ if command -v starship >/dev/null; then
 fi
 
 if command -v wt >/dev/null; then
-	eval "$(command wt config shell init zsh)"
+	_cached_eval wt wt config shell init zsh
 fi
 
 # ^G to edit buffer in $EDITOR (like vi's `v` in bash vi-mode)
