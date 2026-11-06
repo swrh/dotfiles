@@ -28,6 +28,16 @@ if [ -n "$ZSH_VERSION" ]; then
 	alias zsh-cache-clear='rm -rf "$_zsh_cache_dir"'
 fi
 
+{{ if eq .chezmoi.os "darwin" -}}
+# Enable color support for `ls` and `grep` (flags known for macOS, no probing)
+if [ "$TERM" != "dumb" ]; then
+	alias l="ls -laF -v --color=auto"
+	alias grep="grep --color=auto"
+	alias fgrep="grep --color=auto -F"
+else
+	alias l="ls -laF -v"
+fi
+{{- else -}}
 # Enable color support for `ls`
 _lsargs=""
 if ls -d -v / >/dev/null 2>&1; then
@@ -55,6 +65,7 @@ if [ "$TERM" != "dumb" ] && grep --color=auto -qm1 . /etc/hosts >/dev/null 2>&1;
 	alias grep="grep --color=auto"
 	alias fgrep="grep --color=auto -F"
 fi
+{{- end }}
 
 # More aliases.
 alias scr="screen -D -RR -s -$SHELL"
@@ -70,6 +81,8 @@ if command -v chezmoi >/dev/null; then
 	alias cd-chezmoi='cd ~/.local/share/chezmoi'
 fi
 
+{{ if eq .chezmoi.os "linux" -}}
+# Debian/Ubuntu ship these under different names
 if command -v batcat >/dev/null; then
 	alias bat='batcat'
 fi
@@ -77,6 +90,7 @@ fi
 if command -v fdfind >/dev/null; then
 	alias fd='fdfind'
 fi
+{{- end }}
 
 # Set my favorite editor
 if command -v nvim >/dev/null; then
@@ -145,11 +159,14 @@ else
 	HISTFILE="$HOME/.sh_history"
 fi
 
-if [ -x /opt/homebrew/bin/brew ]; then
+{{ if eq .chezmoi.os "darwin" -}}
+{{- $brew := "/opt/homebrew/bin/brew" -}}
+{{- if eq .chezmoi.arch "amd64" }}{{ $brew = "/usr/local/bin/brew" }}{{ end -}}
+if [ -x {{ $brew }} ]; then
 	if [ -n "$ZSH_VERSION" ]; then
-		_cached_eval brew-shellenv /opt/homebrew/bin/brew shellenv zsh
+		_cached_eval brew-shellenv {{ $brew }} shellenv zsh
 	else
-		eval "$(/opt/homebrew/bin/brew shellenv)"
+		eval "$({{ $brew }} shellenv)"
 	fi
 fi
 
@@ -158,6 +175,7 @@ if [ -d "${HOMEBREW_PREFIX:-}/opt/libpq/bin" ]; then
 	PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
 fi
 
+{{ end -}}
 # https://github.com/rbenv/rbenv
 if [ -d "$HOME/.rbenv/bin" ]; then
 	PATH="$HOME/.rbenv/bin:$PATH"
