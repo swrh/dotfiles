@@ -8,6 +8,7 @@
 umask 022
 
 [ ! -d "$HOME/bin" ] || PATH="$HOME/bin:$PATH"
+[ ! -d "$HOME/.local/private/bin" ] || PATH="$HOME/.local/private/bin:$PATH"
 [ ! -d "$HOME/.local/bin" ] || PATH="$HOME/.local/bin:$PATH"
 [ ! -d "$HOME/.docker/bin" ] || PATH="$HOME/.docker/bin:$PATH"
 [ ! -d "$HOME/.fzf/bin" ] || PATH="$HOME/.fzf/bin:$PATH"
