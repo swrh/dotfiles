@@ -128,6 +128,11 @@ if [ -x /opt/homebrew/bin/brew ]; then
 	fi
 fi
 
+# libpq is keg-only, so its binaries (psql, pg_dump, ...) are not linked
+if [ -d "${HOMEBREW_PREFIX:-}/opt/libpq/bin" ]; then
+	PATH="$HOMEBREW_PREFIX/opt/libpq/bin:$PATH"
+fi
+
 # https://github.com/rbenv/rbenv
 if [ -d "$HOME/.rbenv/bin" ]; then
 	PATH="$HOME/.rbenv/bin:$PATH"
