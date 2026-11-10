@@ -1,0 +1,8 @@
+Include config.d/*.conf
+
+Host github.com
+	User git
+	IdentityFile ~/.ssh/id_ed25519
+	ControlMaster auto
+	ControlPath ~/.ssh/sockets/%C
+	ControlPersist 1m
