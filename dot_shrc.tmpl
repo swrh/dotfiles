@@ -209,6 +209,14 @@ mkcd()
 	mkdir -p "$@" && cd "$@"
 }
 
+# Load drop-ins from ~/.shrc.d
+[ -z "$ZSH_VERSION" ] || setopt null_glob
+for _f in "$HOME"/.shrc.d/*.sh; do
+	[ ! -r "$_f" ] || . "$_f"
+done
+[ -z "$ZSH_VERSION" ] || unsetopt null_glob
+unset _f
+
 # Load local shell resources.
 [ ! -r "$HOME/.shrc-local" ] || . "$HOME/.shrc-local"
 

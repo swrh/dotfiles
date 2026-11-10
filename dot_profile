@@ -8,7 +8,6 @@
 umask 022
 
 [ ! -d "$HOME/bin" ] || PATH="$HOME/bin:$PATH"
-[ ! -d "$HOME/.local/private/bin" ] || PATH="$HOME/.local/private/bin:$PATH"
 [ ! -d "$HOME/.local/bin" ] || PATH="$HOME/.local/bin:$PATH"
 [ ! -d "$HOME/.docker/bin" ] || PATH="$HOME/.docker/bin:$PATH"
 [ ! -d "$HOME/.fzf/bin" ] || PATH="$HOME/.fzf/bin:$PATH"
@@ -20,6 +19,14 @@ export LESS="-R"
 export PGSSLMODE="verify-full"
 
 [ ! -r "$HOME/.local/bin/env" ] || . "$HOME/.local/bin/env"
+
+# Load drop-ins from ~/.profile.d
+[ -z "$ZSH_VERSION" ] || setopt null_glob
+for _f in "$HOME"/.profile.d/*.sh; do
+	[ ! -r "$_f" ] || . "$_f"
+done
+[ -z "$ZSH_VERSION" ] || unsetopt null_glob
+unset _f
 
 # include local .profile if it exists
 [ ! -r "$HOME/.profile-local" ] || . "$HOME/.profile-local"
